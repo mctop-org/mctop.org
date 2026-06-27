@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>script - mctop</title>
+<meta name="description" content="Call MCP tools from the shell with mctop ls and mctop call. Pipeable, structured output.">
+<meta property="og:title" content="script - mctop">
+<meta property="og:description" content="Call MCP tools from the shell with mctop ls and mctop call. Pipeable, structured output.">
+<meta property="og:image" content="/brand/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://mctop.org/script/">
+<link rel="icon" type="image/svg+xml" href="/brand/icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/brand/icon-32.png">
+<link rel="apple-touch-icon" href="/brand/icon-180.png">
+<link rel="preload" href="/fonts/AnthrosevkaMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/AnthrosevkaMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="masthead"><div class="wrap">
+  <a class="brand" href="/"><span class="br l">[</span>mctop<span class="br r">]</span></a>
+  <nav class="menu"><a href="/explore/">explore</a><a class=on href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><a href="https://github.com/mctop-org/mctop">github</a><button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button></nav>
+</div><div class="wrap"><hr class="rule"></div></header>
+<main><div class="wrap">
+<h1>script</h1>
+<p class="tagline">skip the ui when you just need an answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.</p>
+<section class="sec"><h2>example</h2><div class="block"><pre><span class="d">$</span> mctop call <span class="s">"uvx mcp-server-time"</span> get_current_time timezone=UTC
+{
+  <span class="k">"timezone"</span>: "UTC",
+  <span class="k">"datetime"</span>: "2026-06-27T04:41:00+00:00",
+  <span class="k">"day_of_week"</span>: "Saturday"
+}</pre></div><p>arguments are <code>key=value</code> pairs. values that look like json (numbers, booleans, arrays, objects) are typed; everything else is a string. pass a whole object with <code>--json '{...}'</code>. exit status reflects the call, so it composes in pipelines.</p></section>
+
+<section class="sec"><h2>install</h2><div class="copyline"><span class="d">$</span><code>curl -fsSL <span class="url">https://mctop.org/install</span> | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div><p class="dim">other ways on the <a href="/download/">install page</a>.</p></section>
+</div></main>
+<footer class="man"><div class="wrap">
+  <div class="row head"><span>MCTOP(1)</span><span>General Commands Manual</span><span>MCTOP(1)</span></div>
+  <div class="row"><span>NAME &nbsp; mctop – a terminal client for the model context protocol</span></div>
+  <div class="row"><span>SEE ALSO &nbsp; <a href="/explore/">explore</a> <a href="/script/">script</a> <a href="/test/">test</a> <a href="/download/">install</a> <a href="https://github.com/mctop-org/mctop">github</a></span></div>
+  <div class="row" style="margin-top:14px"><span>mctop.org</span><span>MIT</span><span>built for the shell</span></div>
+</div></footer>
+<script src="/app.js"></script>
+</body></html>

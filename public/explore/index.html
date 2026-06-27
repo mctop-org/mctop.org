@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>explore - mctop</title>
+<meta name="description" content="Browse an MCP server's tools, resources, and prompts and run them in a schema-driven form.">
+<meta property="og:title" content="explore - mctop">
+<meta property="og:description" content="Browse an MCP server's tools, resources, and prompts and run them in a schema-driven form.">
+<meta property="og:image" content="/brand/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://mctop.org/explore/">
+<link rel="icon" type="image/svg+xml" href="/brand/icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/brand/icon-32.png">
+<link rel="apple-touch-icon" href="/brand/icon-180.png">
+<link rel="preload" href="/fonts/AnthrosevkaMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/AnthrosevkaMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="masthead"><div class="wrap">
+  <a class="brand" href="/"><span class="br l">[</span>mctop<span class="br r">]</span></a>
+  <nav class="menu"><a class=on href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><a href="https://github.com/mctop-org/mctop">github</a><button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button></nav>
+</div><div class="wrap"><hr class="rule"></div></header>
+<main><div class="wrap">
+<h1>explore</h1>
+<p class="tagline">run mctop against a server to open the full-screen client. move through tools, resources, and prompts, fill a tool's arguments in a schema-driven form, run it, and read the result laid out as fields and tables, not raw json.</p>
+<section class="sec"><h2>example</h2><div class="block"><pre><span class="s">  mctop  &middot;  uvx mcp-server-time</span>        <span class="ok">&#9679;</span> connected
+ <span class="k">TOOLS (2)</span>              <span class="s">|</span>  <span class="k">get_current_time</span>
+ <span class="k">&#9612; get_current_time</span>     <span class="s">|</span>  get current time in a
+   <span class="s">convert_time</span>        <span class="s">|</span>  specific timezone
+ <span class="s">RESOURCES (0)</span>         <span class="s">|</span>  <span class="s">timezone</span><span class="k">*</span> string
+ <span class="s">PROMPTS (0)</span>           <span class="s">|</span>  <span class="k">enter</span> to call</pre></div><p>the result view reads the data: dates, yes/no, and grouped numbers are formatted, nested objects become sections, and arrays of records become selectable tables. press <code>t</code> for raw json, <code>T</code> for the protocol trace, <code>y</code> to copy.</p></section>
+<section class="sec"><h2>keys</h2><dl class="keys"><dt>&#8593;&#8595; / j k</dt><dd>move and scroll</dd><dt>enter / l</dt><dd>open, expand a row</dd><dt>/</dt><dd>search names and descriptions</dd><dt>tab</dt><dd>next section</dd><dt>T</dt><dd>protocol trace</dd><dt>?</dt><dd>all keys</dd></dl></section>
+<section class="sec"><h2>install</h2><div class="copyline"><span class="d">$</span><code>curl -fsSL <span class="url">https://mctop.org/install</span> | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div><p class="dim">other ways on the <a href="/download/">install page</a>.</p></section>
+</div></main>
+<footer class="man"><div class="wrap">
+  <div class="row head"><span>MCTOP(1)</span><span>General Commands Manual</span><span>MCTOP(1)</span></div>
+  <div class="row"><span>NAME &nbsp; mctop – a terminal client for the model context protocol</span></div>
+  <div class="row"><span>SEE ALSO &nbsp; <a href="/explore/">explore</a> <a href="/script/">script</a> <a href="/test/">test</a> <a href="/download/">install</a> <a href="https://github.com/mctop-org/mctop">github</a></span></div>
+  <div class="row" style="margin-top:14px"><span>mctop.org</span><span>MIT</span><span>built for the shell</span></div>
+</div></footer>
+<script src="/app.js"></script>
+</body></html>

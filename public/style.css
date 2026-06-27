@@ -1,0 +1,90 @@
+/* mctop.org — a plain-text document. Mono, narrow column, hairline rules. */
+@font-face{font-family:"Anthrosevka Mono";src:url("/fonts/AnthrosevkaMono-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Anthrosevka Mono";src:url("/fonts/AnthrosevkaMono-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  --bg:#191724; --text:#e0def4; --subtle:#908caa; --muted:#6e6a86;
+  --iris:#c4a7e7; --rule:rgba(110,106,134,.28); --code-bg:#1f1d2e;
+  --col:76ch;
+}
+:root[data-theme="light"]{
+  --bg:#faf4ed; --text:#575279; --subtle:#797593; --muted:#9893a5;
+  --iris:#907aa9; --rule:rgba(121,117,147,.26); --code-bg:#fffaf3;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Anthrosevka Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:var(--bg); color:var(--text);
+  font-size:15px; line-height:1.75; letter-spacing:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 22px}
+
+a{color:var(--iris);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--iris)}
+
+/* masthead: one line of text + a rule */
+.masthead{padding:30px 0 0}
+.masthead .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:18px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:16px;color:var(--text);border:0}
+.brand .br{color:var(--iris);font-weight:400}
+.brand .br.l{margin-right:.3em}.brand .br.r{margin-left:.3em}
+.menu{font-size:14px;color:var(--muted);display:flex;gap:16px;align-items:baseline}
+.menu a{color:var(--subtle);border:0}
+.menu a:hover,.menu a.on{color:var(--iris)}
+.tbtn{background:none;border:0;color:var(--muted);cursor:pointer;font-family:inherit;font-size:14px;line-height:1}
+.tbtn:hover{color:var(--iris)}
+.rule{border:0;border-top:1px solid var(--rule);margin:18px 0 0}
+
+main{padding:44px 0 0}
+h1{font-size:23px;font-weight:700;line-height:1.25;margin:0 0 16px}
+h1 .mark{color:var(--iris)}
+.tagline{color:var(--subtle);margin-bottom:30px;max-width:64ch}
+
+h2{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--subtle);margin:0 0 16px}
+.sec{padding:34px 0;border-top:1px solid var(--rule)}
+.sec:first-of-type{border-top:0;padding-top:6px}
+.sec p{max-width:66ch;margin:0 0 14px}
+.sec p .dim{color:var(--subtle)}
+p code,li code,.sec p code{color:var(--iris);background:var(--code-bg);padding:.05em .35em;border-radius:4px;font-size:.95em}
+
+/* command / code blocks: indented text with a hairline gutter, no chrome */
+.block{background:var(--code-bg);border-left:2px solid var(--iris);
+  padding:14px 16px;margin:0 0 16px;overflow-x:auto;font-size:14px;line-height:1.65}
+.block pre{font-family:inherit;white-space:pre;color:var(--text)}
+.block .d{color:var(--iris)}
+.block .s{color:var(--subtle)}
+.block .k{color:var(--iris)}
+.block .ok{color:#9ece6a}.block .no{color:#eb6f92}
+
+.copyline{display:flex;align-items:center;gap:12px;background:var(--code-bg);
+  border-left:2px solid var(--iris);padding:13px 16px;margin:0 0 18px;font-size:14px}
+.copyline code{flex:1;white-space:nowrap;overflow:auto}
+.copyline .d{color:var(--iris)}.copyline .url{color:var(--text)}
+.copy{background:none;border:1px solid var(--rule);color:var(--muted);cursor:pointer;
+  font-family:inherit;font-size:12px;padding:3px 9px;border-radius:5px;white-space:nowrap}
+.copy:hover{color:var(--iris);border-color:var(--iris)}.copy.ok{color:#9ece6a;border-color:#9ece6a}
+
+/* table-of-contents style page list */
+.toc{list-style:none}
+.toc li{padding:8px 0;border-top:1px solid var(--rule);display:flex;gap:16px;align-items:baseline}
+.toc li:first-child{border-top:0}
+.toc .name{color:var(--iris);min-width:11ch}
+.toc .desc{color:var(--subtle)}
+
+dl.keys{display:grid;grid-template-columns:max-content 1fr;gap:8px 22px;font-size:14px;max-width:60ch}
+dl.keys dt{color:var(--iris)}
+dl.keys dd{color:var(--subtle)}
+
+.man{margin-top:54px;padding:22px 0 56px;border-top:1px solid var(--rule);color:var(--muted);font-size:13px}
+.man .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.man .row.head{letter-spacing:1px;margin-bottom:14px}
+.man a{color:var(--subtle)}.man a:hover{color:var(--iris)}
+
+@media (max-width:560px){
+  body{font-size:14.5px}
+  .masthead .wrap{flex-direction:column;gap:10px}
+  h1{font-size:20px}
+}

@@ -1,0 +1,12 @@
+{
+  "name": "mctop-site",
+  "private": true,
+  "scripts": {
+    "sync": "cp ../install.sh public/install",
+    "dev": "wrangler dev --port 8788",
+    "deploy": "npm run sync && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

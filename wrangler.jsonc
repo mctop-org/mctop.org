@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mctop-site",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "mctop.org", "custom_domain": true },
+    { "pattern": "www.mctop.org", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}

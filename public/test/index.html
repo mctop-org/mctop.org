@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>test - mctop</title>
+<meta name="description" content="Assert an MCP server's contract in CI with a YAML spec. Exits non-zero when a tool is renamed or a call drifts.">
+<meta property="og:title" content="test - mctop">
+<meta property="og:description" content="Assert an MCP server's contract in CI with a YAML spec. Exits non-zero when a tool is renamed or a call drifts.">
+<meta property="og:image" content="/brand/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://mctop.org/test/">
+<link rel="icon" type="image/svg+xml" href="/brand/icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/brand/icon-32.png">
+<link rel="apple-touch-icon" href="/brand/icon-180.png">
+<link rel="preload" href="/fonts/AnthrosevkaMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/AnthrosevkaMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="masthead"><div class="wrap">
+  <a class="brand" href="/"><span class="br l">[</span>mctop<span class="br r">]</span></a>
+  <nav class="menu"><a href="/explore/">explore</a><a href="/script/">script</a><a class=on href="/test/">test</a><a href="/download/">install</a><a href="https://github.com/mctop-org/mctop">github</a><button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button></nav>
+</div><div class="wrap"><hr class="rule"></div></header>
+<main><div class="wrap">
+<h1>test</h1>
+<p class="tagline">declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.</p>
+<section class="sec"><h2>example</h2><div class="block"><pre><span class="s"># spec.yaml</span>
+<span class="k">expect</span>:
+  <span class="k">tools</span>: [search, fetch]
+<span class="k">calls</span>:
+  - <span class="k">tool</span>: search
+    <span class="k">assert</span>: { not_error: true, contains: "result" }
+
+<span class="d">$</span> mctop test spec.yaml
+<span class="ok">&#10003; tools present   &#10003; search not_error   &#10003; search contains</span>
+3 passed, 0 failed   <span class="ok">exit 0</span></pre></div><p>specs are strict yaml: unknown keys are errors, so a typo never silently passes. assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. add <code>--report json</code> for machine-readable ci output.</p></section>
+
+<section class="sec"><h2>install</h2><div class="copyline"><span class="d">$</span><code>curl -fsSL <span class="url">https://mctop.org/install</span> | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div><p class="dim">other ways on the <a href="/download/">install page</a>.</p></section>
+</div></main>
+<footer class="man"><div class="wrap">
+  <div class="row head"><span>MCTOP(1)</span><span>General Commands Manual</span><span>MCTOP(1)</span></div>
+  <div class="row"><span>NAME &nbsp; mctop – a terminal client for the model context protocol</span></div>
+  <div class="row"><span>SEE ALSO &nbsp; <a href="/explore/">explore</a> <a href="/script/">script</a> <a href="/test/">test</a> <a href="/download/">install</a> <a href="https://github.com/mctop-org/mctop">github</a></span></div>
+  <div class="row" style="margin-top:14px"><span>mctop.org</span><span>MIT</span><span>built for the shell</span></div>
+</div></footer>
+<script src="/app.js"></script>
+</body></html>
