@@ -24,8 +24,9 @@ def head(title, desc, canonical):
 <meta name="description" content="{desc}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="/brand/icon-512.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://mctop.org/brand/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://mctop.org{canonical}">
 <link rel="icon" type="image/svg+xml" href="/brand/icon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/brand/icon-32.png">
