@@ -10,8 +10,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PUB = os.path.join(HERE, "public")
 DASH = "–"   # en dash, allowed; em dashes are not used anywhere
 
-NAV = [("explore", "/explore/"), ("script", "/script/"),
-       ("test", "/test/"), ("install", "/download/")]
+# menu is grouped: the usage pages, then the get-it links.
+USAGE = [("explore", "/explore/"), ("script", "/script/"), ("test", "/test/")]
+META = [("install", "/download/"), ("github", "https://github.com/mctop-org/mctop")]
 
 def head(title, desc, canonical):
     return f"""<!doctype html>
@@ -41,19 +42,21 @@ def head(title, desc, canonical):
 <main><div class="wrap">"""
 
 def menu(active):
-    out = []
-    for label, href in NAV:
+    def link(label, href):
         on = " class=on" if href == active else ""
-        out.append(f'<a{on} href="{href}">{label}</a>')
-    out.append('<a href="https://github.com/mctop-org/mctop">github</a>')
-    return "".join(out)
+        return f'<a{on} href="{href}">{label}</a>'
+    usage = "".join(link(l, h) for l, h in USAGE)
+    meta = "".join(link(l, h) for l, h in META)
+    return (f'<span class="grp">{usage}</span>'
+            f'<span class="sep" aria-hidden="true">│</span>'
+            f'<span class="grp">{meta}</span>')
 
 FOOT = f"""</div></main>
 <footer class="man"><div class="wrap">
   <div class="row head"><span>MCTOP(1)</span><span>General Commands Manual</span><span>MCTOP(1)</span></div>
   <div class="row"><span>NAME &nbsp; mctop {DASH} a terminal client for the model context protocol</span></div>
   <div class="row"><span>SEE ALSO &nbsp; <a href="/explore/">explore</a> <a href="/script/">script</a> <a href="/test/">test</a> <a href="/download/">install</a> <a href="https://github.com/mctop-org/mctop">github</a></span></div>
-  <div class="row" style="margin-top:14px"><span>mctop.org</span><span>MIT</span><span>built for the shell</span></div>
+  <div class="row" style="margin-top:14px"><span>mctop.org</span><span>MIT</span><span>v0.14.0</span></div>
 </div></footer>
 <script src="/app.js"></script>
 </body></html>"""
@@ -161,11 +164,11 @@ write("/explore/", "explore - mctop",
       "Browse an MCP server's tools, resources, and prompts and run them in a schema-driven form.",
       feature("/explore/", "explore", "run mctop against a server to open the full-screen client. move through tools, resources, and prompts, fill a tool's arguments in a schema-driven form, run it, and read the result laid out as fields and tables, not raw json.",
               explore_blk,
-              "<p>the result view reads the data: dates, yes/no, and grouped numbers are formatted, nested objects become sections, and arrays of records become selectable tables. press <code>t</code> for raw json, <code>T</code> for the protocol trace, <code>y</code> to copy.</p>",
+              "<p>the result view formats values by type: dates, yes/no, and grouped numbers. nested objects become sections, and arrays of records become selectable tables. press <code>t</code> for raw json, <code>T</code> for the protocol trace, <code>y</code> to copy.</p>",
               keys=[("&#8593;&#8595; / j k","move and scroll"),("enter / l","open, expand a row"),("/","search names and descriptions"),("tab","next section"),("T","protocol trace"),("?","all keys")]))
 write("/script/", "script - mctop",
       "Call MCP tools from the shell with mctop ls and mctop call. Pipeable, structured output.",
-      feature("/script/", "script", "skip the ui when you just need an answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.",
+      feature("/script/", "script", "for non-interactive use. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.",
               script_blk,
               "<p>arguments are <code>key=value</code> pairs. values that look like json (numbers, booleans, arrays, objects) are typed; everything else is a string. pass a whole object with <code>--json '{...}'</code>. exit status reflects the call, so it composes in pipelines.</p>"))
 write("/test/", "test - mctop",

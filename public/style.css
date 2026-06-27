@@ -88,3 +88,7 @@ dl.keys dd{color:var(--subtle)}
   .masthead .wrap{flex-direction:column;gap:10px}
   h1{font-size:20px}
 }
+
+/* grouped menu: usage pages | get-it links */
+.menu .grp{display:flex;gap:16px;align-items:baseline}
+.menu .sep{color:var(--muted);opacity:.45;font-weight:400}
