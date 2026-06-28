@@ -19,14 +19,14 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<header class="masthead"><div class="wrap">
-  <a class="brand" href="/"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><rect x="19" y="45" width="11" height="30" rx="3.5"/><rect x="36" y="25" width="11" height="50" rx="3.5"/><rect x="53" y="51" width="11" height="24" rx="3.5"/><rect x="70" y="33" width="11" height="42" rx="3.5"/></g></svg>mctop</a>
-  <nav class="menu"><span class="grp"><a href="/explore/">explore</a><a href="/script/">script</a><a class=on href="/test/">test</a></span><span class="sep" aria-hidden="true">│</span><span class="grp"><a href="/download/">install</a><a href="https://github.com/mctop-org/mctop">github</a></span><button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button></nav>
-</div><div class="wrap"><hr class="rule"></div></header>
-<main><div class="wrap">
-<h1>test</h1>
-<p class="tagline">declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.</p>
-<section class="sec"><h2>example</h2><div class="block"><pre><span class="s"># spec.yaml</span>
+<header class="top">
+  <div class="wrap topbar">
+    <a class="brand" href="/"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><rect x="19" y="45" width="11" height="30" rx="3.5"/><rect x="36" y="25" width="11" height="50" rx="3.5"/><rect x="53" y="51" width="11" height="24" rx="3.5"/><rect x="70" y="33" width="11" height="42" rx="3.5"/></g></svg>mctop</a>
+    <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
+  </div>
+  <nav class="mainnav"><div class="wrap"><a href="/">home</a><a href="/explore/">explore</a><a href="/script/">script</a><a class=on href="/test/">test</a><a href="/download/">install</a><span class="grow"></span><a class="ext" href="https://github.com/mctop-org/mctop">github</a></div></nav>
+</header>
+<main><div class="wrap"><h1>test</h1><p class="tagline">declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.</p><section class="box"><div class="h"><span>example</span></div><div class="b"><div class="block"><pre><span class="s"># spec.yaml</span>
 <span class="k">expect</span>:
   <span class="k">tools</span>: [search, fetch]
 <span class="k">calls</span>:
@@ -35,16 +35,26 @@
 
 <span class="d">$</span> mctop test spec.yaml
 <span class="ok">&#10003; tools present   &#10003; search not_error   &#10003; search contains</span>
-3 passed, 0 failed   <span class="ok">exit 0</span></pre></div><p>specs are strict yaml: unknown keys are errors, so a typo never silently passes. assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. add <code>--report json</code> for machine-readable ci output.</p></section>
-
-<section class="sec"><h2>install</h2><div class="copyline"><span class="d">$</span><code>curl -fsSL <span class="url">https://mctop.org/install</span> | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div><p class="dim">other ways on the <a href="/download/">install page</a>.</p></section>
-</div></main>
-<footer class="man"><div class="wrap">
-  <div class="row head"><span>MCTOP(1)</span><span>General Commands Manual</span><span>MCTOP(1)</span></div>
-  <div class="row"><span>NAME &nbsp; mctop – a terminal client for the model context protocol</span></div>
-  <div class="row"><span>SEE ALSO &nbsp; <a href="/explore/">explore</a> <a href="/script/">script</a> <a href="/test/">test</a> <a href="/download/">install</a></span></div>
-  <div class="row"><span>SOURCE &nbsp; <a href="https://github.com/mctop-org/mctop">github</a> &middot; <a href="https://github.com/mctop-org/mctop/releases/latest">latest release</a> &middot; <a href="https://modelcontextprotocol.io">MCP</a></span></div>
-  <div class="row" style="margin-top:14px"><span>mctop.org</span><span><a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT license</a></span><span>open source</span></div>
+3 passed, 0 failed   <span class="ok">exit 0</span></pre></div><p>specs are strict yaml: unknown keys are errors, so a typo never silently passes. assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. add <code>--report json</code> for machine-readable ci output.</p></div></section><section class="box"><div class="h"><span>install</span></div><div class="b"><div class="copyline"><span class="d">$</span><code>curl -fsSL https://mctop.org/install | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div><p class="dim">other ways on the <a href="/download/">install page</a>.</p></div></section></div></main>
+<footer class="foot"><div class="wrap">
+  <div class="foot-cols">
+    <div class="foot-col"><h4>documentation</h4>
+      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">readme</a>
+      <a href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a></div>
+    <div class="foot-col"><h4>install</h4>
+      <a href="/install">shell installer</a>
+      <a href="/download/">homebrew</a><a href="/download/">go install</a></div>
+    <div class="foot-col"><h4>source</h4>
+      <a href="https://github.com/mctop-org/mctop">github</a>
+      <a href="https://github.com/mctop-org/mctop/releases/latest">latest release</a>
+      <a href="https://github.com/mctop-org/mctop/issues">issues</a>
+      <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT license</a></div>
+    <div class="foot-col"><h4>protocol</h4>
+      <a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a>
+      <a href="https://github.com/modelcontextprotocol">MCP on github</a></div>
+  </div>
+  <div class="foot-bot"><span>mctop.org &middot; a terminal client for the model context protocol</span>
+    <span><a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT</a> &middot; open source</span></div>
 </div></footer>
 <script src="/app.js"></script>
 </body></html>
