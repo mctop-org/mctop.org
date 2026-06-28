@@ -31,7 +31,6 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 .topbar{display:flex;justify-content:space-between;align-items:center;padding:13px 0}
 .brand{font-weight:700;font-size:17px;color:var(--text);display:inline-flex;align-items:center;gap:.46em}
 .brand:hover{text-decoration:none}
-.brand .mk{width:1.05em;height:1.05em;color:var(--iris);display:block}
 .tbtn{background:none;border:1px solid var(--rule);color:var(--muted);cursor:pointer;font-family:inherit;font-size:13px;width:28px;height:28px;display:grid;place-items:center}
 .tbtn:hover{color:var(--iris);border-color:var(--iris)}
 .mainnav{background:var(--navbg);border-top:1px solid var(--rule)}
@@ -90,6 +89,12 @@ p code,li code,td code{color:var(--iris);background:var(--code-bg);padding:.03em
 dl.keys{display:grid;grid-template-columns:max-content 1fr;gap:7px 22px;font-size:14px;max-width:62ch}
 dl.keys dt{color:var(--iris)}dl.keys dd{color:var(--subtle)}
 
+/* synopsis: command -> description, aligned on desktop, stacked on mobile */
+dl.syn{display:grid;grid-template-columns:max-content 1fr;gap:9px 26px;align-items:baseline}
+dl.syn dt{white-space:nowrap}
+dl.syn dt code{color:var(--iris);background:none;padding:0}
+dl.syn dd{color:var(--subtle)}
+
 /* multi-column footer */
 .foot{border-top:3px solid var(--iris);margin-top:36px;background:var(--surface)}
 .foot .wrap{padding:26px 20px 30px}
@@ -102,9 +107,52 @@ dl.keys dt{color:var(--iris)}dl.keys dd{color:var(--subtle)}
 
 @media (max-width:720px){
   .foot-cols{grid-template-columns:repeat(2,1fr)}
-  .mainnav .wrap{flex-wrap:wrap}
 }
+
+@media (max-width:640px){
+  .wrap{padding:0 14px}
+  main{padding:22px 0 0}
+  h1{font-size:20px}
+  .tagline{margin-bottom:18px}
+
+  /* nav: scroll sideways instead of wrapping into a ragged block */
+  .mainnav .wrap{padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .mainnav .wrap::-webkit-scrollbar{display:none}
+  .mainnav a{white-space:nowrap;padding:10px 14px;border-right:1px solid var(--rule)}
+  .mainnav a:first-child{border-left:1px solid var(--rule)}
+  .mainnav .grow{display:none}
+  .mainnav .ext{border-left:1px solid var(--rule)}
+
+  /* boxes: tighter padding so content gets the width */
+  .box>.b{padding:13px 12px}
+  .box>.h{padding:7px 12px}
+
+  /* terminal renders stay verbatim but scale to the viewport so the
+     widest line fits a phone; very narrow screens still scroll gracefully */
+  .block{font-size:clamp(8px,2.55vw,11px);padding:11px 12px}
+  .block pre{white-space:pre}
+
+  /* copy line: let the command scroll, keep the button reachable */
+  .copyline{flex-wrap:wrap;font-size:12.5px;padding:10px 12px}
+  .copyline code{flex:1 1 100%;min-width:0;order:2}
+  .copyline .d{order:1}
+  .copyline .copy{order:1;margin-left:auto}
+
+  /* synopsis + command/keys lists: stack name over description */
+  dl.syn{grid-template-columns:1fr;gap:0}
+  dl.syn dt{margin-top:11px}
+  dl.syn dt:first-child{margin-top:0}
+  dl.syn dd{margin:1px 0 0}
+  dl.keys{grid-template-columns:1fr;gap:0}
+  dl.keys dt{margin-top:9px}
+  dl.keys dt:first-child{margin-top:0}
+  .toc li{flex-direction:column;gap:1px}
+
+  /* releases feed: stack the date above the tag */
+  .rel li{gap:2px 12px}
+  .rel .date{min-width:0;flex-basis:100%}
+}
+
 @media (max-width:480px){
-  body{font-size:14px}
-  .foot-cols{grid-template-columns:1fr}
+  .foot-cols{grid-template-columns:1fr;gap:18px}
 }

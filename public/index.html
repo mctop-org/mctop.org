@@ -21,7 +21,7 @@
 <body>
 <header class="top">
   <div class="wrap topbar">
-    <a class="brand" href="/"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><rect x="19" y="45" width="11" height="30" rx="3.5"/><rect x="36" y="25" width="11" height="50" rx="3.5"/><rect x="53" y="51" width="11" height="24" rx="3.5"/><rect x="70" y="33" width="11" height="42" rx="3.5"/></g></svg>mctop</a>
+    <a class="brand" href="/">mctop</a>
     <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
   </div>
   <nav class="mainnav"><div class="wrap"><a class=on href="/">home</a><a href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><span class="grow"></span><a class="ext" href="https://github.com/mctop-org/mctop">github</a></div></nav>
@@ -40,19 +40,21 @@
                        <span class="s">│</span>  <span class="k">&#10095;</span><span class="s"> enter to call</span>
 <span class="s">  ────────────────────────────────────────────────</span>
    <span class="s">enter open &middot; / search &middot; tab section &middot; ? keys</span></pre></div><p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse tools, resources, and prompts, fill its arguments, and read the result.</p></div></section>
-<section class="box"><div class="h"><span>synopsis</span></div><div class="b"><div class="block"><pre><span class="s">mctop &lt;target&gt;</span>                 open the interactive client
-<span class="s">mctop ls &lt;target&gt;</span>              list tools, resources, prompts
-<span class="s">mctop call &lt;target&gt; &lt;tool&gt;</span>     call one tool, print the result
-<span class="s">mctop test &lt;spec.yaml&gt;</span>         run a contract, exit 0 or 1
-<span class="s">mctop login &lt;url&gt;</span>              log in to an OAuth server
-<span class="s">mctop upgrade</span>                  update to the latest release</pre></div><p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url.</p></div></section>
+<section class="box"><div class="h"><span>synopsis</span></div><div class="b"><dl class="syn">
+  <dt><code>mctop &lt;target&gt;</code></dt><dd>open the interactive client</dd>
+  <dt><code>mctop ls &lt;target&gt;</code></dt><dd>list tools, resources, prompts</dd>
+  <dt><code>mctop call &lt;target&gt; &lt;tool&gt;</code></dt><dd>call one tool, print the result</dd>
+  <dt><code>mctop test &lt;spec.yaml&gt;</code></dt><dd>run a contract, exit 0 or 1</dd>
+  <dt><code>mctop login &lt;url&gt;</code></dt><dd>log in to an OAuth server</dd>
+  <dt><code>mctop upgrade</code></dt><dd>update to the latest release</dd>
+</dl><p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url.</p></div></section>
 <section class="box"><div class="h"><span>commands</span></div><div class="b"><ul class="toc">
   <li><a class="name" href="/explore/">explore</a><span class="desc">browse a server and run a tool in a schema-driven form</span></li>
   <li><a class="name" href="/script/">script</a><span class="desc">one-shot calls from the shell, structured output, pipeable</span></li>
   <li><a class="name" href="/test/">test</a><span class="desc">assert a server's contract in CI, fail the build on drift</span></li>
   <li><a class="name" href="/download/">install</a><span class="desc">shell, homebrew, or go install. one static binary</span></li>
 </ul></div></section>
-<section class="box"><div class="h"><span>releases</span><a href="https://github.com/mctop-org/mctop/releases">all releases &rarr;</a></div><div class="b"><ul class="rel"><li><span class="date">2026-06-27</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.14.0">v0.14.0</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-22</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.2">v0.13.2</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.1">v0.13.1</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.0">v0.13.0</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-20</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.12.0">v0.12.0</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-20</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.11.0">v0.11.0</a><span class="note">linux and macos, amd64 and arm64</span></li></ul></div></section>
+<section class="box"><div class="h"><span>releases</span><a href="https://github.com/mctop-org/mctop/releases">all releases &rarr;</a></div><div class="b"><ul class="rel"><li><span class="date">2026-06-28</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.15.0">v0.15.0</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-27</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.14.0">v0.14.0</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-22</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.2">v0.13.2</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.1">v0.13.1</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.0">v0.13.0</a><span class="note">linux and macos, amd64 and arm64</span></li><li><span class="date">2026-06-20</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.12.0">v0.12.0</a><span class="note">linux and macos, amd64 and arm64</span></li></ul></div></section>
 </div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">

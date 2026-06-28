@@ -16,10 +16,6 @@ REPO = "https://github.com/mctop-org/mctop"
 NAV = [("home", "/"), ("explore", "/explore/"), ("script", "/script/"),
        ("test", "/test/"), ("install", "/download/")]
 
-BARS = ('<svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor">'
-        '<rect x="19" y="45" width="11" height="30" rx="3.5"/><rect x="36" y="25" width="11" height="50" rx="3.5"/>'
-        '<rect x="53" y="51" width="11" height="24" rx="3.5"/><rect x="70" y="33" width="11" height="42" rx="3.5"/></g></svg>')
-
 def nav(active):
     out = []
     for label, href in NAV:
@@ -52,7 +48,7 @@ def head(title, desc, canonical):
 <body>
 <header class="top">
   <div class="wrap topbar">
-    <a class="brand" href="/">{BARS}mctop</a>
+    <a class="brand" href="/">mctop</a>
     <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
   </div>
   <nav class="mainnav"><div class="wrap">{nav(canonical)}</div></nav>
@@ -134,12 +130,14 @@ home = f"""
 <p class="tagline">curl and k9s, but for the model context protocol. connect to any server, browse its tools, resources, and prompts, call them, and read the result, without leaving the shell. then gate its contract in CI.</p>
 {COPYLINE}
 {box("the client", DEMO + '<p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse tools, resources, and prompts, fill its arguments, and read the result.</p>')}
-{box("synopsis", block('''<span class="s">mctop &lt;target&gt;</span>                 open the interactive client
-<span class="s">mctop ls &lt;target&gt;</span>              list tools, resources, prompts
-<span class="s">mctop call &lt;target&gt; &lt;tool&gt;</span>     call one tool, print the result
-<span class="s">mctop test &lt;spec.yaml&gt;</span>         run a contract, exit 0 or 1
-<span class="s">mctop login &lt;url&gt;</span>              log in to an OAuth server
-<span class="s">mctop upgrade</span>                  update to the latest release''') + '<p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url.</p>')}
+{box("synopsis", '''<dl class="syn">
+  <dt><code>mctop &lt;target&gt;</code></dt><dd>open the interactive client</dd>
+  <dt><code>mctop ls &lt;target&gt;</code></dt><dd>list tools, resources, prompts</dd>
+  <dt><code>mctop call &lt;target&gt; &lt;tool&gt;</code></dt><dd>call one tool, print the result</dd>
+  <dt><code>mctop test &lt;spec.yaml&gt;</code></dt><dd>run a contract, exit 0 or 1</dd>
+  <dt><code>mctop login &lt;url&gt;</code></dt><dd>log in to an OAuth server</dd>
+  <dt><code>mctop upgrade</code></dt><dd>update to the latest release</dd>
+</dl>''' + '<p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url.</p>')}
 {box("commands", '''<ul class="toc">
   <li><a class="name" href="/explore/">explore</a><span class="desc">browse a server and run a tool in a schema-driven form</span></li>
   <li><a class="name" href="/script/">script</a><span class="desc">one-shot calls from the shell, structured output, pipeable</span></li>
