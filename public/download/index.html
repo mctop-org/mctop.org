@@ -30,22 +30,20 @@
 <h1>install</h1>
 <p class="tagline">one static binary, no runtime. it self-updates with <code>mctop upgrade</code>, however you installed it.</p>
 <section class="box"><div class="h"><span>shell</span></div><div class="b"><div class="block"><pre><span class="d">$</span> curl -fsSL https://mctop.org/install | sh</pre></div><p class="dim">the installer is plain text at <a href="/install">mctop.org/install</a>. it downloads the release archive, checks its sha256 against the published checksums, and refuses to install on a mismatch.</p></div></section>
-<section class="box"><div class="h"><span>homebrew</span></div><div class="b"><div class="block"><pre><span class="d">$</span> brew install mctop-org/tap/mctop</pre></div></div></section>
-<section class="box"><div class="h"><span>go</span></div><div class="b"><div class="block"><pre><span class="d">$</span> go install github.com/mctop-org/mctop@latest</pre></div></div></section>
+<section class="box" id="homebrew"><div class="h"><span>homebrew</span></div><div class="b"><div class="block"><pre><span class="d">$</span> brew install mctop-org/tap/mctop</pre></div></div></section>
+<section class="box" id="go"><div class="h"><span>go</span></div><div class="b"><div class="block"><pre><span class="d">$</span> go install github.com/mctop-org/mctop@latest</pre></div></div></section>
 <section class="box"><div class="h"><span>platforms</span></div><div class="b"><p>prebuilt binaries for linux and macos on amd64 and arm64. windows builds are on the <a href="https://github.com/mctop-org/mctop/releases/latest">releases page</a>.</p></div></section>
 <section class="box"><div class="h"><span>upgrade</span></div><div class="b"><p><code>mctop upgrade</code> fetches the latest release in place. the shell installer also re-runs cleanly to update.</p></div></section>
 </div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
-    <div class="foot-col"><h4>documentation</h4>
-      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">readme</a>
-      <a href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a></div>
     <div class="foot-col"><h4>install</h4>
       <a href="/install">shell installer</a>
-      <a href="/download/">homebrew</a><a href="/download/">go install</a></div>
+      <a href="/download/#homebrew">homebrew</a>
+      <a href="/download/#go">go install</a></div>
     <div class="foot-col"><h4>source</h4>
       <a href="https://github.com/mctop-org/mctop">github</a>
-      <a href="https://github.com/mctop-org/mctop/releases/latest">latest release</a>
+      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">readme</a>
       <a href="https://github.com/mctop-org/mctop/issues">issues</a>
       <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT license</a></div>
     <div class="foot-col"><h4>protocol</h4>

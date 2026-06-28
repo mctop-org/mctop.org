@@ -10,7 +10,6 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PUB = os.path.join(HERE, "public")
-DASH = "–"
 REPO = "https://github.com/mctop-org/mctop"
 
 NAV = [("home", "/"), ("explore", "/explore/"), ("script", "/script/"),
@@ -55,9 +54,10 @@ def head(title, desc, canonical):
 </header>
 <main><div class="wrap">"""
 
-def box(title, body, right=""):
+def box(title, body, right="", anchor=""):
     r = f'<a href="{right[1]}">{right[0]}</a>' if right else ""
-    return f'<section class="box"><div class="h"><span>{title}</span>{r}</div><div class="b">{body}</div></section>'
+    aid = f' id="{anchor}"' if anchor else ""
+    return f'<section class="box"{aid}><div class="h"><span>{title}</span>{r}</div><div class="b">{body}</div></section>'
 
 def block(lines):
     return f'<div class="block"><pre>{lines}</pre></div>'
@@ -69,15 +69,13 @@ COPYLINE = ('<div class="copyline"><span class="d">$</span>'
 FOOT = f"""</div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
-    <div class="foot-col"><h4>documentation</h4>
-      <a href="{REPO}/blob/main/README.md">readme</a>
-      <a href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a></div>
     <div class="foot-col"><h4>install</h4>
       <a href="/install">shell installer</a>
-      <a href="/download/">homebrew</a><a href="/download/">go install</a></div>
+      <a href="/download/#homebrew">homebrew</a>
+      <a href="/download/#go">go install</a></div>
     <div class="foot-col"><h4>source</h4>
       <a href="{REPO}">github</a>
-      <a href="{REPO}/releases/latest">latest release</a>
+      <a href="{REPO}/blob/main/README.md">readme</a>
       <a href="{REPO}/issues">issues</a>
       <a href="{REPO}/blob/main/LICENSE">MIT license</a></div>
     <div class="foot-col"><h4>protocol</h4>
@@ -108,8 +106,7 @@ def releases_box():
         parts = line.split("|")
         tag, date = parts[0], parts[1] if len(parts) > 1 else ""
         rows.append(f'<li><span class="date">{date}</span>'
-                    f'<a class="tag" href="{REPO}/releases/tag/{tag}">{tag}</a>'
-                    f'<span class="note">linux and macos, amd64 and arm64</span></li>')
+                    f'<a class="tag" href="{REPO}/releases/tag/{tag}">{tag}</a></li>')
     body = f'<ul class="rel">{"".join(rows)}</ul>'
     return box("releases", body, right=("all releases &rarr;", f"{REPO}/releases"))
 
@@ -179,8 +176,8 @@ download = f"""
 <h1>install</h1>
 <p class="tagline">one static binary, no runtime. it self-updates with <code>mctop upgrade</code>, however you installed it.</p>
 {box("shell", block('<span class="d">$</span> curl -fsSL https://mctop.org/install | sh') + '<p class="dim">the installer is plain text at <a href="/install">mctop.org/install</a>. it downloads the release archive, checks its sha256 against the published checksums, and refuses to install on a mismatch.</p>')}
-{box("homebrew", block('<span class="d">$</span> brew install mctop-org/tap/mctop'))}
-{box("go", block('<span class="d">$</span> go install github.com/mctop-org/mctop@latest'))}
+{box("homebrew", block('<span class="d">$</span> brew install mctop-org/tap/mctop'), anchor="homebrew")}
+{box("go", block('<span class="d">$</span> go install github.com/mctop-org/mctop@latest'), anchor="go")}
 {box("platforms", f'<p>prebuilt binaries for linux and macos on amd64 and arm64. windows builds are on the <a href="{REPO}/releases/latest">releases page</a>.</p>')}
 {box("upgrade", '<p><code>mctop upgrade</code> fetches the latest release in place. the shell installer also re-runs cleanly to update.</p>')}
 """

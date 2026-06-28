@@ -77,7 +77,6 @@ p code,li code,td code{color:var(--iris);background:var(--code-bg);padding:.03em
 .rel li:first-child{border-top:0}
 .rel .date{color:var(--muted);min-width:11ch;font-size:13.5px}
 .rel .tag{color:var(--iris);font-weight:700}
-.rel .note{color:var(--subtle);font-size:13.5px}
 
 /* command reference: mode | invocation | description, columns aligned */
 .cmds{list-style:none;display:grid;grid-template-columns:max-content max-content 1fr;gap:11px 26px;align-items:baseline;margin:0 0 16px}
@@ -94,7 +93,7 @@ dl.keys dt{color:var(--iris)}dl.keys dd{color:var(--subtle)}
 /* multi-column footer */
 .foot{border-top:3px solid var(--iris);margin-top:36px;background:var(--surface)}
 .foot .wrap{padding:26px 20px 30px}
-.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .foot-col h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:0 0 9px}
 .foot-col a{display:block;color:var(--subtle);font-size:13px;padding:3px 0}
 .foot-col a:hover{color:var(--iris)}
