@@ -79,21 +79,17 @@ p code,li code,td code{color:var(--iris);background:var(--code-bg);padding:.03em
 .rel .tag{color:var(--iris);font-weight:700}
 .rel .note{color:var(--subtle);font-size:13.5px}
 
-/* command index */
-.toc{list-style:none}
-.toc li{display:flex;gap:16px;align-items:baseline;padding:7px 0;border-top:1px solid var(--rule)}
-.toc li:first-child{border-top:0}
-.toc .name{color:var(--iris);min-width:11ch;font-weight:700}
-.toc .desc{color:var(--subtle)}
+/* command reference: mode | invocation | description, columns aligned */
+.cmds{list-style:none;display:grid;grid-template-columns:max-content max-content 1fr;gap:11px 26px;align-items:baseline;margin:0 0 16px}
+.cmds li{display:contents}
+.cmds .m{font-weight:700;color:var(--iris)}
+.cmds a.m:hover{text-decoration:underline;text-underline-offset:3px}
+.cmds .m.u{color:var(--muted);font-weight:400}
+.cmds code{color:var(--text);background:none;padding:0;white-space:nowrap;font-size:.97em}
+.cmds .d{color:var(--subtle)}
 
 dl.keys{display:grid;grid-template-columns:max-content 1fr;gap:7px 22px;font-size:14px;max-width:62ch}
 dl.keys dt{color:var(--iris)}dl.keys dd{color:var(--subtle)}
-
-/* synopsis: command -> description, aligned on desktop, stacked on mobile */
-dl.syn{display:grid;grid-template-columns:max-content 1fr;gap:9px 26px;align-items:baseline}
-dl.syn dt{white-space:nowrap}
-dl.syn dt code{color:var(--iris);background:none;padding:0}
-dl.syn dd{color:var(--subtle)}
 
 /* multi-column footer */
 .foot{border-top:3px solid var(--iris);margin-top:36px;background:var(--surface)}
@@ -138,15 +134,17 @@ dl.syn dd{color:var(--subtle)}
   .copyline .d{order:1}
   .copyline .copy{order:1;margin-left:auto}
 
-  /* synopsis + command/keys lists: stack name over description */
-  dl.syn{grid-template-columns:1fr;gap:0}
-  dl.syn dt{margin-top:11px}
-  dl.syn dt:first-child{margin-top:0}
-  dl.syn dd{margin:1px 0 0}
+  /* command reference + keys: stack each entry instead of aligning columns */
+  .cmds{grid-template-columns:1fr;gap:0}
+  .cmds li{display:block;padding:11px 0;border-top:1px solid var(--rule)}
+  .cmds li:first-child{padding-top:0;border-top:0}
+  .cmds .m{display:inline-block;margin-right:10px}
+  .cmds .m.e:empty{display:none}
+  .cmds code{display:inline-block;margin:1px 0}
+  .cmds .d{display:block;margin-top:2px}
   dl.keys{grid-template-columns:1fr;gap:0}
   dl.keys dt{margin-top:9px}
   dl.keys dt:first-child{margin-top:0}
-  .toc li{flex-direction:column;gap:1px}
 
   /* releases feed: stack the date above the tag */
   .rel li{gap:2px 12px}

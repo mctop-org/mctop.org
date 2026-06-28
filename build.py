@@ -130,20 +130,14 @@ home = f"""
 <p class="tagline">curl and k9s, but for the model context protocol. connect to any server, browse its tools, resources, and prompts, call them, and read the result, without leaving the shell. then gate its contract in CI.</p>
 {COPYLINE}
 {box("the client", DEMO + '<p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse tools, resources, and prompts, fill its arguments, and read the result.</p>')}
-{box("synopsis", '''<dl class="syn">
-  <dt><code>mctop &lt;target&gt;</code></dt><dd>open the interactive client</dd>
-  <dt><code>mctop ls &lt;target&gt;</code></dt><dd>list tools, resources, prompts</dd>
-  <dt><code>mctop call &lt;target&gt; &lt;tool&gt;</code></dt><dd>call one tool, print the result</dd>
-  <dt><code>mctop test &lt;spec.yaml&gt;</code></dt><dd>run a contract, exit 0 or 1</dd>
-  <dt><code>mctop login &lt;url&gt;</code></dt><dd>log in to an OAuth server</dd>
-  <dt><code>mctop upgrade</code></dt><dd>update to the latest release</dd>
-</dl>''' + '<p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url.</p>')}
-{box("commands", '''<ul class="toc">
-  <li><a class="name" href="/explore/">explore</a><span class="desc">browse a server and run a tool in a schema-driven form</span></li>
-  <li><a class="name" href="/script/">script</a><span class="desc">one-shot calls from the shell, structured output, pipeable</span></li>
-  <li><a class="name" href="/test/">test</a><span class="desc">assert a server's contract in CI, fail the build on drift</span></li>
-  <li><a class="name" href="/download/">install</a><span class="desc">shell, homebrew, or go install. one static binary</span></li>
-</ul>''')}
+{box("commands", '''<ul class="cmds">
+  <li><a class="m" href="/explore/">explore</a><code>mctop &lt;target&gt;</code><span class="d">open the interactive client</span></li>
+  <li><a class="m" href="/script/">script</a><code>mctop ls &lt;target&gt;</code><span class="d">list tools, resources, prompts</span></li>
+  <li><span class="m e"></span><code>mctop call &lt;target&gt; &lt;tool&gt;</code><span class="d">call one tool, print the result</span></li>
+  <li><a class="m" href="/test/">test</a><code>mctop test &lt;spec.yaml&gt;</code><span class="d">assert a contract in CI, fail on drift</span></li>
+  <li><span class="m u">login</span><code>mctop login &lt;url&gt;</code><span class="d">log in to an OAuth server</span></li>
+  <li><span class="m u">upgrade</span><code>mctop upgrade</code><span class="d">update in place</span></li>
+</ul>''' + '<p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url. explore, script, and test each have a page; login and upgrade are one-off utilities.</p>')}
 {releases_box()}
 """
 
