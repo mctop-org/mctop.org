@@ -28,18 +28,21 @@
 </header>
 <main><div class="wrap">
 <h1>a terminal client for <span class="mark">MCP</span> servers</h1>
-<p class="tagline">curl and k9s, but for the model context protocol. connect to any server, browse its tools, resources, and prompts, call them, and read the result, without leaving the shell. then gate its contract in CI.</p>
+<p class="tagline">curl and k9s, but for the model context protocol: explore a server, call its tools, and gate its contract in CI.</p>
 <div class="copyline"><span class="d">$</span><code>curl -fsSL https://mctop.org/install | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div>
-<section class="box"><div class="h"><span>the client</span></div><div class="b"><div class="block"><pre><span class="s">  &#10095; mctop uvx mcp-server-time</span>            <span class="ok">&#9679;</span><span class="s"> connected</span>
-<span class="s">  ────────────────────────────────────────────────</span>
-   <span class="k">TOOLS (2)</span>            <span class="s">│</span>  <span class="k">get_current_time</span>
-   <span class="k">▌ get_current_time</span>   <span class="s">│</span>  get current time in a
-     <span class="s">convert_time</span>       <span class="s">│</span>  specific timezone
-   <span class="s">RESOURCES (0)</span>       <span class="s">│</span>  <span class="s">ARGUMENTS</span>
-   <span class="s">PROMPTS (0)</span>         <span class="s">│</span>  <span class="s">timezone</span><span class="k">*</span> string
-                       <span class="s">│</span>  <span class="k">&#10095;</span><span class="s"> enter to call</span>
-<span class="s">  ────────────────────────────────────────────────</span>
-   <span class="s">enter open &middot; / search &middot; tab section &middot; ? keys</span></pre></div><p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse tools, resources, and prompts, fill its arguments, and read the result.</p></div></section>
+<section class="box"><div class="h"><span>the client</span></div><div class="b"><div class="block"><pre><span class="s">┌────────────────────────────────────────────────┐</span>
+<span class="s">│</span><span class="s">  ❯ mctop uvx mcp-server-time</span>      <span class="ok">●</span><span class="s"> connected</span>  <span class="s">│</span>
+<span class="s">├─────────────────────┬──────────────────────────┤</span>
+<span class="s">│</span><span class="k">  TOOLS (2)</span>          <span class="s">│</span><span class="k">  get_current_time</span>        <span class="s">│</span>
+<span class="s">│</span><span class="k">  ▌ get_current_time</span> <span class="s">│</span>  get the current time    <span class="s">│</span>
+<span class="s">│</span><span class="s">    convert_time</span>     <span class="s">│</span>  in a given timezone     <span class="s">│</span>
+<span class="s">│</span><span class="s">  RESOURCES (0)</span>      <span class="s">│</span>                          <span class="s">│</span>
+<span class="s">│</span><span class="s">  PROMPTS (0)</span>        <span class="s">│</span><span class="s">  ARGUMENTS</span>               <span class="s">│</span>
+<span class="s">│</span>                     <span class="s">│</span>  <span class="s">timezone</span><span class="k">*</span>  string       <span class="s">│</span>
+<span class="s">│</span>                     <span class="s">│</span>  <span class="k">❯</span><span class="s"> enter to call</span>         <span class="s">│</span>
+<span class="s">├─────────────────────┴──────────────────────────┤</span>
+<span class="s">│</span><span class="s">  enter open · / search · tab section · ? keys</span>  <span class="s">│</span>
+<span class="s">└────────────────────────────────────────────────┘</span></pre></div><p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse a server&#39;s tools, resources, and prompts, fill in a tool&#39;s arguments, and read the result.</p></div></section>
 <section class="box"><div class="h"><span>commands</span></div><div class="b"><ul class="cmds">
   <li><a class="m" href="/explore/">explore</a><code>mctop &lt;target&gt;</code><span class="d">open the interactive client</span></li>
   <li><a class="m" href="/script/">script</a><code>mctop ls &lt;target&gt;</code><span class="d">list tools, resources, prompts</span></li>
@@ -47,7 +50,7 @@
   <li><a class="m" href="/test/">test</a><code>mctop test &lt;spec.yaml&gt;</code><span class="d">assert a contract in CI, fail on drift</span></li>
   <li><span class="m u">login</span><code>mctop login &lt;url&gt;</code><span class="d">log in to an OAuth server</span></li>
   <li><span class="m u">upgrade</span><code>mctop upgrade</code><span class="d">update in place</span></li>
-</ul><p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url. explore, script, and test each have a page; login and upgrade are one-off utilities.</p></div></section>
+</ul><p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url. explore, script, and test each have a page; login and upgrade are utilities.</p></div></section>
 <section class="box"><div class="h"><span>releases</span><a href="https://github.com/mctop-org/mctop/releases">all releases &rarr;</a></div><div class="b"><ul class="rel"><li><span class="date">2026-06-28</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.15.0">v0.15.0</a></li><li><span class="date">2026-06-27</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.14.0">v0.14.0</a></li><li><span class="date">2026-06-22</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.2">v0.13.2</a></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.1">v0.13.1</a></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.0">v0.13.0</a></li><li><span class="date">2026-06-20</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.12.0">v0.12.0</a></li></ul></div></section>
 </div></main>
 <footer class="foot"><div class="wrap">
@@ -59,14 +62,13 @@
     <div class="foot-col"><h4>source</h4>
       <a href="https://github.com/mctop-org/mctop">github</a>
       <a href="https://github.com/mctop-org/mctop/blob/main/README.md">readme</a>
-      <a href="https://github.com/mctop-org/mctop/issues">issues</a>
-      <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT license</a></div>
+      <a href="https://github.com/mctop-org/mctop/issues">issues</a></div>
     <div class="foot-col"><h4>protocol</h4>
       <a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a>
       <a href="https://github.com/modelcontextprotocol">MCP on github</a></div>
   </div>
-  <div class="foot-bot"><span>mctop.org &middot; a terminal client for the model context protocol</span>
-    <span><a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT</a> &middot; open source</span></div>
+  <div class="foot-bot"><span>mctop.org</span>
+    <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT license</a></div>
 </div></footer>
 <script src="/app.js"></script>
 </body></html>
