@@ -37,7 +37,7 @@ def head(title, desc, canonical):
 </head>
 <body>
 <header class="masthead"><div class="wrap">
-  <a class="brand" href="/"><span class="pr">&#10095;</span>mctop</a>
+  <a class="brand" href="/"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor"><rect x="19" y="45" width="11" height="30" rx="3.5"/><rect x="36" y="25" width="11" height="50" rx="3.5"/><rect x="53" y="51" width="11" height="24" rx="3.5"/><rect x="70" y="33" width="11" height="42" rx="3.5"/></g></svg>mctop</a>
   <nav class="menu">{menu(canonical)}<button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button></nav>
 </div><div class="wrap"><hr class="rule"></div></header>
 <main><div class="wrap">"""

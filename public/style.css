@@ -28,9 +28,9 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 /* masthead: a manual header line + a rule */
 .masthead{padding:26px 0 0}
 .masthead .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:18px;flex-wrap:wrap}
-.brand{font-weight:700;font-size:16px;color:var(--text)}
+.brand{font-weight:700;font-size:16px;color:var(--text);display:inline-flex;align-items:center;gap:.46em}
 .brand:hover{text-decoration:none}
-.brand .pr{color:var(--iris);font-weight:700;margin-right:.34em}
+.brand .mk{width:1.05em;height:1.05em;color:var(--iris);display:block}
 .menu{font-size:14px;color:var(--muted);display:flex;gap:14px;align-items:baseline}
 .menu .grp{display:flex;gap:14px;align-items:baseline}
 .menu .sep{color:var(--muted);opacity:.5}
