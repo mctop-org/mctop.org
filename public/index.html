@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -20,13 +20,27 @@
 </head>
 <body>
 <header class="masthead"><div class="wrap">
-  <a class="brand" href="/"><span class="br l">[</span>mctop<span class="br r">]</span></a>
+  <a class="brand" href="/"><span class="pr">&#10095;</span>mctop</a>
   <nav class="menu"><span class="grp"><a href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a></span><span class="sep" aria-hidden="true">│</span><span class="grp"><a href="/download/">install</a><a href="https://github.com/mctop-org/mctop">github</a></span><button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button></nav>
 </div><div class="wrap"><hr class="rule"></div></header>
 <main><div class="wrap">
 <h1>a terminal client for <span class="mark">MCP</span> servers</h1>
 <p class="tagline">curl and k9s, but for the model context protocol. connect to any server, browse its tools, resources, and prompts, call them, and read the result, without leaving the shell. then gate its contract in CI.</p>
 <div class="copyline"><span class="d">$</span><code>curl -fsSL <span class="url">https://mctop.org/install</span> | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div>
+
+<section class="sec"><h2>the client</h2>
+<div class="block"><pre><span class="s">  &#10095; mctop uvx mcp-server-time</span>            <span class="ok">&#9679;</span><span class="s"> connected</span>
+<span class="s">  ────────────────────────────────────────────────</span>
+   <span class="k">TOOLS (2)</span>            <span class="s">│</span>  <span class="k">get_current_time</span>
+   <span class="k">▌ get_current_time</span>   <span class="s">│</span>  get current time in a
+     <span class="s">convert_time</span>       <span class="s">│</span>  specific timezone
+   <span class="s">RESOURCES (0)</span>       <span class="s">│</span>  <span class="s">ARGUMENTS</span>
+   <span class="s">PROMPTS (0)</span>         <span class="s">│</span>  <span class="s">timezone</span><span class="k">*</span> string
+                       <span class="s">│</span>  <span class="k">&#10095;</span><span class="s"> enter to call</span>
+<span class="s">  ────────────────────────────────────────────────</span>
+   <span class="s">enter open &middot; / search &middot; tab section &middot; ? keys</span></pre></div>
+<p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse tools, resources, and prompts, fill a tool's arguments, and read the result.</p>
+</section>
 
 <section class="sec"><h2>synopsis</h2>
 <div class="block"><pre><span class="s">mctop &lt;target&gt;</span>                 open the interactive client
