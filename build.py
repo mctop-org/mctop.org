@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Assemble mctop.org in the classic Linux-project layout (Arch lineage):
-header + tabbed nav, boxed sections with dark header bars, a live releases feed,
-and a multi-column footer. Static output into public/.
+"""Assemble mctop.org: a lean, single-column documentation site.
+
+Sections are open (an eyebrow label over a hairline, then content), not boxed.
+The client preview is a real aligned CSS component, generated once and reused so
+it looks identical on every page. Static output into public/.
 
 Releases are read from releases.txt (lines "tag|date|name") if present, written
 at build time from the live GitHub releases, so the feed stays current.
@@ -20,8 +22,8 @@ def nav(active):
     for label, href in NAV:
         on = " class=on" if href == active else ""
         out.append(f'<a{on} href="{href}">{label}</a>')
-    return ("".join(out) + '<span class="grow"></span>'
-            f'<a class="ext" href="{REPO}">github</a>')
+    out.append(f'<a class="ext" href="{REPO}">github</a>')
+    return "".join(out)
 
 def head(title, desc, canonical):
     return f"""<!doctype html>
@@ -45,19 +47,17 @@ def head(title, desc, canonical):
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<header class="top">
-  <div class="wrap topbar">
-    <a class="brand" href="/">mctop</a>
-    <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
-  </div>
-  <nav class="mainnav"><div class="wrap">{nav(canonical)}</div></nav>
-</header>
+<header class="top"><div class="wrap top-in">
+  <a class="brand" href="/">mctop</a>
+  <nav class="nav">{nav(canonical)}</nav>
+  <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
+</div></header>
 <main><div class="wrap">"""
 
-def box(title, body, right="", anchor=""):
+def section(label, body, right=""):
     r = f'<a href="{right[1]}">{right[0]}</a>' if right else ""
-    aid = f' id="{anchor}"' if anchor else ""
-    return f'<section class="box"{aid}><div class="h"><span>{title}</span>{r}</div><div class="b">{body}</div></section>'
+    return (f'<section class="sec"><div class="sec-h">'
+            f'<span class="eyebrow">{label}</span>{r}</div>{body}</section>')
 
 def block(lines):
     return f'<div class="block"><pre>{lines}</pre></div>'
@@ -66,7 +66,68 @@ COPYLINE = ('<div class="copyline"><span class="d">$</span>'
             '<code>curl -fsSL https://mctop.org/install | sh</code>'
             '<button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div>')
 
-FOOT = f"""</div></main>
+# ---------------- the client preview: one aligned CSS component, reused everywhere ----------------
+def client():
+    return '''<div class="tui">
+  <div class="tui-bar">
+    <span class="cmd"><span class="p">&#10095;</span> mctop uvx mcp-server-time</span>
+    <span class="stat"><span class="dot"></span>connected</span>
+  </div>
+  <div class="tui-body">
+    <div class="pane list">
+      <p class="grp">tools <span class="ct">2</span></p>
+      <p class="row on">get_current_time</p>
+      <p class="row">convert_time</p>
+      <p class="grp">resources <span class="ct">0</span></p>
+      <p class="grp">prompts <span class="ct">0</span></p>
+    </div>
+    <div class="pane detail">
+      <p class="nm">get_current_time</p>
+      <p class="ds">get the current time in a given timezone</p>
+      <p class="grp">arguments</p>
+      <p class="arg"><span class="an">timezone</span><span class="rq">*</span> <span class="ty">string</span></p>
+      <p class="call"><span class="p">&#10095;</span> enter to call</p>
+    </div>
+  </div>
+  <div class="tui-foot">enter open &middot; / search &middot; tab section &middot; ? keys</div>
+</div>'''
+
+# ---------------- home ----------------
+home = f"""
+<h1>a terminal client for <span class="mark">MCP</span> servers</h1>
+<p class="tagline">curl and k9s, but for the model context protocol: explore a server, call its tools, and gate its contract in CI.</p>
+{COPYLINE}
+{section("the client", client() + '<p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse a server&#39;s tools, resources, and prompts, fill in a tool&#39;s arguments, and read the result.</p>')}
+{section("commands", '''<ul class="cmds">
+  <li><a class="m" href="/explore/">explore</a><code>mctop &lt;target&gt;</code><span class="d">open the interactive client</span></li>
+  <li><a class="m" href="/script/">script</a><code>mctop ls &lt;target&gt;</code><span class="d">list tools, resources, prompts</span></li>
+  <li><span class="m e"></span><code>mctop call &lt;target&gt; &lt;tool&gt;</code><span class="d">call one tool, print the result</span></li>
+  <li><a class="m" href="/test/">test</a><code>mctop test &lt;spec.yaml&gt;</code><span class="d">assert a contract in CI, fail on drift</span></li>
+  <li><span class="m u">login</span><code>mctop login &lt;url&gt;</code><span class="d">log in to an OAuth server</span></li>
+  <li><span class="m u">upgrade</span><code>mctop upgrade</code><span class="d">update in place</span></li>
+</ul>''' + '<p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url. explore, script, and test each have a page; login and upgrade are utilities.</p>')}
+{{RELEASES}}
+"""
+
+def releases_body():
+    f = os.path.join(HERE, "releases.txt")
+    if not os.path.exists(f):
+        return section("releases",
+                       f'<p class="dim">prebuilt binaries for every release. <a href="{REPO}/releases">see all releases</a>.</p>',
+                       right=("all releases &rarr;", f"{REPO}/releases"))
+    rows = []
+    for line in open(f).read().splitlines():
+        if not line.strip():
+            continue
+        parts = line.split("|")
+        tag, date = parts[0], parts[1] if len(parts) > 1 else ""
+        rows.append(f'<li><span class="date">{date}</span>'
+                    f'<a class="tag" href="{REPO}/releases/tag/{tag}">{tag}</a></li>')
+    return section("releases", f'<ul class="rel">{"".join(rows)}</ul>',
+                   right=("all releases &rarr;", f"{REPO}/releases"))
+
+def foot():
+    return f"""</div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
     <div class="foot-col"><h4>install</h4>
@@ -88,85 +149,17 @@ FOOT = f"""</div></main>
 </body></html>"""
 
 def page(path, title, desc, body):
-    full = head(title, desc, path) + body + FOOT
+    full = head(title, desc, path) + body + foot()
     outdir = PUB if path == "/" else os.path.join(PUB, path.strip("/"))
     os.makedirs(outdir, exist_ok=True)
     open(os.path.join(outdir, "index.html"), "w").write(full)
 
-def releases_box():
-    f = os.path.join(HERE, "releases.txt")
-    if not os.path.exists(f):
-        body = f'<p class="dim">prebuilt binaries for every release. <a href="{REPO}/releases">see all releases</a>.</p>'
-        return box("releases", body, right=("all releases &rarr;", f"{REPO}/releases"))
-    rows = []
-    for line in open(f).read().splitlines():
-        if not line.strip():
-            continue
-        parts = line.split("|")
-        tag, date = parts[0], parts[1] if len(parts) > 1 else ""
-        rows.append(f'<li><span class="date">{date}</span>'
-                    f'<a class="tag" href="{REPO}/releases/tag/{tag}">{tag}</a></li>')
-    body = f'<ul class="rel">{"".join(rows)}</ul>'
-    return box("releases", body, right=("all releases &rarr;", f"{REPO}/releases"))
-
-# ---------------- the client panel (generated so every column lines up) ----------------
-def client_panel():
-    W, LW = 48, 21            # inner width, left-pane width; divider + right pane fill the rest
-    RW = W - LW - 1
-    sp = lambda cls, s: f'<span class="{cls}">{s}</span>' if cls else s
-    vis = lambda cells: sum(len(t) for t, _ in cells)
-    htm = lambda cells: "".join(sp(c, t) for t, c in cells)
-    pad = lambda cells, width: htm(cells) + " " * (width - vis(cells))
-    def split(left, right, trail=2):                      # left-aligned, right-aligned, computed gap
-        gap = W - vis(left) - vis(right) - trail
-        return htm(left) + " " * gap + htm(right) + " " * trail
-    B = lambda ch: sp("s", ch)
-    rows = [
-        ([("  TOOLS (2)", "k")],          [("  get_current_time", "k")]),
-        ([("  ▌ get_current_time", "k")], [("  get the current time", None)]),
-        ([("    convert_time", "s")],      [("  in a given timezone", None)]),
-        ([("  RESOURCES (0)", "s")],       [("", None)]),
-        ([("  PROMPTS (0)", "s")],         [("  ARGUMENTS", "s")]),
-        ([("", None)],                     [("  ", None), ("timezone", "s"), ("*", "k"), ("  string", None)]),
-        ([("", None)],                     [("  ", None), ("❯", "k"), (" enter to call", "s")]),
-    ]
-    header = split([("  ❯ mctop uvx mcp-server-time", "s")], [("●", "ok"), (" connected", "s")])
-    footer = pad([("  enter open · / search · tab section · ? keys", "s")], W)
-    out = [B("┌" + "─" * W + "┐"),
-           B("│") + header + B("│"),
-           B("├" + "─" * LW + "┬" + "─" * RW + "┤")]
-    for lc, rc in rows:
-        out.append(B("│") + pad(lc, LW) + B("│") + pad(rc, RW) + B("│"))
-    out += [B("├" + "─" * LW + "┴" + "─" * RW + "┤"),
-            B("│") + footer + B("│"),
-            B("└" + "─" * W + "┘")]
-    return "\n".join(out)
-
-# ---------------- home ----------------
-DEMO = block(client_panel())
-
-home = f"""
-<h1>a terminal client for <span class="mark">MCP</span> servers</h1>
-<p class="tagline">curl and k9s, but for the model context protocol: explore a server, call its tools, and gate its contract in CI.</p>
-{COPYLINE}
-{box("the client", DEMO + '<p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse a server&#39;s tools, resources, and prompts, fill in a tool&#39;s arguments, and read the result.</p>')}
-{box("commands", '''<ul class="cmds">
-  <li><a class="m" href="/explore/">explore</a><code>mctop &lt;target&gt;</code><span class="d">open the interactive client</span></li>
-  <li><a class="m" href="/script/">script</a><code>mctop ls &lt;target&gt;</code><span class="d">list tools, resources, prompts</span></li>
-  <li><span class="m e"></span><code>mctop call &lt;target&gt; &lt;tool&gt;</code><span class="d">call one tool, print the result</span></li>
-  <li><a class="m" href="/test/">test</a><code>mctop test &lt;spec.yaml&gt;</code><span class="d">assert a contract in CI, fail on drift</span></li>
-  <li><span class="m u">login</span><code>mctop login &lt;url&gt;</code><span class="d">log in to an OAuth server</span></li>
-  <li><span class="m u">upgrade</span><code>mctop upgrade</code><span class="d">update in place</span></li>
-</ul>''' + '<p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url. explore, script, and test each have a page; login and upgrade are utilities.</p>')}
-{releases_box()}
-"""
-
-def feature(path, title, lede, blk, prose, keys=None):
-    inner = block(blk) + prose
-    parts = [f'<h1>{title}</h1><p class="tagline">{lede}</p>', box("example", inner)]
+def feature(title, lede, example_html, prose, keys=None):
+    parts = [f'<h1>{title}</h1><p class="tagline">{lede}</p>',
+             section("example", example_html + prose)]
     if keys:
         rows = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in keys)
-        parts.append(box("keys", f'<dl class="keys">{rows}</dl>'))
+        parts.append(section("keys", f'<dl class="keys">{rows}</dl>'))
     return "".join(parts)
 
 script_blk = '''<span class="d">$</span> mctop call <span class="s">"uvx mcp-server-time"</span> get_current_time timezone=UTC
@@ -190,30 +183,31 @@ test_blk = '''<span class="s"># spec.yaml</span>
 download = f"""
 <h1>install</h1>
 <p class="tagline">one static binary, no runtime.</p>
-{box("shell", block('<span class="d">$</span> curl -fsSL https://mctop.org/install | sh') + '<p class="dim">the installer is plain text at <a href="/install">mctop.org/install</a>. it downloads the release archive, checks its sha256 against the published checksums, and refuses to install on a mismatch.</p>')}
-{box("homebrew", block('<span class="d">$</span> brew install mctop-org/tap/mctop'), anchor="homebrew")}
-{box("go", block('<span class="d">$</span> go install github.com/mctop-org/mctop@latest'), anchor="go")}
-{box("platforms", f'<p>prebuilt binaries for linux and macos on amd64 and arm64. windows builds are on the <a href="{REPO}/releases/latest">releases page</a>.</p>')}
-{box("upgrade", '<p><code>mctop upgrade</code> fetches the latest release in place. the shell installer also re-runs cleanly to update.</p>')}
+{section("shell", block('<span class="d">$</span> curl -fsSL https://mctop.org/install | sh') + '<p class="dim">the installer is plain text at <a href="/install">mctop.org/install</a>. it downloads the release archive, checks its sha256 against the published checksums, and refuses to install on a mismatch.</p>')}
+{section("homebrew", block('<span class="d">$</span> brew install mctop-org/tap/mctop'))}
+{section("go", block('<span class="d">$</span> go install github.com/mctop-org/mctop@latest'))}
+{section("platforms", f'<p>prebuilt binaries for linux and macos on amd64 and arm64. windows builds are on the <a href="{REPO}/releases/latest">releases page</a>.</p>')}
+{section("upgrade", '<p><code>mctop upgrade</code> fetches the latest release in place. the shell installer also re-runs cleanly to update.</p>')}
 """
 
 page("/", "mctop - a terminal client for MCP servers",
-     "Explore, call, and CI-test any MCP server from your shell. curl and k9s, but for the Model Context Protocol.", home)
+     "Explore, call, and CI-test any MCP server from your shell. curl and k9s, but for the Model Context Protocol.",
+     home.replace("{RELEASES}", releases_body()))
 page("/explore/", "explore - mctop",
      "Browse an MCP server's tools, resources, and prompts and run them in a schema-driven form.",
-     feature("/explore/", "explore", "run mctop against a server to open the full-screen client. move through its tools, resources, and prompts, fill a tool's arguments in a schema-driven form, run it, and read the result laid out as fields and tables, not raw json.",
-        client_panel(),
+     feature("explore", "run mctop against a server to open the full-screen client. move through its tools, resources, and prompts, fill a tool's arguments in a schema-driven form, run it, and read the result laid out as fields and tables, not raw json.",
+        client(),
         "<p>the result view formats values by type: dates, yes/no, and grouped numbers. nested objects become sections, and arrays of records become selectable tables. press <code>t</code> for raw json, <code>T</code> for the protocol trace, <code>y</code> to copy.</p>",
         keys=[("&#8593;&#8595; / j k","move and scroll"),("enter / l","open or expand a row"),("/","search names and descriptions"),("tab","next section"),("T","protocol trace"),("?","all keys")]))
 page("/script/", "script - mctop",
      "Call MCP tools from the shell with mctop ls and mctop call. Pipeable, structured output.",
-     feature("/script/", "script", "skip the ui when you only need the answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.",
-        script_blk,
+     feature("script", "skip the ui when you only need the answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.",
+        block(script_blk),
         "<p>arguments are <code>key=value</code> pairs. values that look like json (numbers, booleans, arrays, objects) are typed; everything else is a string. pass a whole object with <code>--json '{...}'</code>. exit status reflects the call, so it composes in pipelines.</p>"))
 page("/test/", "test - mctop",
      "Assert an MCP server's contract in CI with a YAML spec. Exits non-zero when a tool is renamed or a call drifts.",
-     feature("/test/", "test", "declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.",
-        test_blk,
+     feature("test", "declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.",
+        block(test_blk),
         "<p>specs are strict yaml: unknown keys are errors, so a typo never silently passes. assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. add <code>--report json</code> for machine-readable CI output.</p>"))
 page("/download/", "install - mctop",
      "Install mctop via shell, Homebrew, or go install. One static binary, self-updates with mctop upgrade.", download)

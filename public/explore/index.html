@@ -19,26 +19,34 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<header class="top">
-  <div class="wrap topbar">
-    <a class="brand" href="/">mctop</a>
-    <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
+<header class="top"><div class="wrap top-in">
+  <a class="brand" href="/">mctop</a>
+  <nav class="nav"><a href="/">home</a><a class=on href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><a class="ext" href="https://github.com/mctop-org/mctop">github</a></nav>
+  <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
+</div></header>
+<main><div class="wrap"><h1>explore</h1><p class="tagline">run mctop against a server to open the full-screen client. move through its tools, resources, and prompts, fill a tool's arguments in a schema-driven form, run it, and read the result laid out as fields and tables, not raw json.</p><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="tui">
+  <div class="tui-bar">
+    <span class="cmd"><span class="p">&#10095;</span> mctop uvx mcp-server-time</span>
+    <span class="stat"><span class="dot"></span>connected</span>
   </div>
-  <nav class="mainnav"><div class="wrap"><a href="/">home</a><a class=on href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><span class="grow"></span><a class="ext" href="https://github.com/mctop-org/mctop">github</a></div></nav>
-</header>
-<main><div class="wrap"><h1>explore</h1><p class="tagline">run mctop against a server to open the full-screen client. move through its tools, resources, and prompts, fill a tool's arguments in a schema-driven form, run it, and read the result laid out as fields and tables, not raw json.</p><section class="box"><div class="h"><span>example</span></div><div class="b"><div class="block"><pre><span class="s">┌────────────────────────────────────────────────┐</span>
-<span class="s">│</span><span class="s">  ❯ mctop uvx mcp-server-time</span>      <span class="ok">●</span><span class="s"> connected</span>  <span class="s">│</span>
-<span class="s">├─────────────────────┬──────────────────────────┤</span>
-<span class="s">│</span><span class="k">  TOOLS (2)</span>          <span class="s">│</span><span class="k">  get_current_time</span>        <span class="s">│</span>
-<span class="s">│</span><span class="k">  ▌ get_current_time</span> <span class="s">│</span>  get the current time    <span class="s">│</span>
-<span class="s">│</span><span class="s">    convert_time</span>     <span class="s">│</span>  in a given timezone     <span class="s">│</span>
-<span class="s">│</span><span class="s">  RESOURCES (0)</span>      <span class="s">│</span>                          <span class="s">│</span>
-<span class="s">│</span><span class="s">  PROMPTS (0)</span>        <span class="s">│</span><span class="s">  ARGUMENTS</span>               <span class="s">│</span>
-<span class="s">│</span>                     <span class="s">│</span>  <span class="s">timezone</span><span class="k">*</span>  string       <span class="s">│</span>
-<span class="s">│</span>                     <span class="s">│</span>  <span class="k">❯</span><span class="s"> enter to call</span>         <span class="s">│</span>
-<span class="s">├─────────────────────┴──────────────────────────┤</span>
-<span class="s">│</span><span class="s">  enter open · / search · tab section · ? keys</span>  <span class="s">│</span>
-<span class="s">└────────────────────────────────────────────────┘</span></pre></div><p>the result view formats values by type: dates, yes/no, and grouped numbers. nested objects become sections, and arrays of records become selectable tables. press <code>t</code> for raw json, <code>T</code> for the protocol trace, <code>y</code> to copy.</p></div></section><section class="box"><div class="h"><span>keys</span></div><div class="b"><dl class="keys"><dt>&#8593;&#8595; / j k</dt><dd>move and scroll</dd><dt>enter / l</dt><dd>open or expand a row</dd><dt>/</dt><dd>search names and descriptions</dd><dt>tab</dt><dd>next section</dd><dt>T</dt><dd>protocol trace</dd><dt>?</dt><dd>all keys</dd></dl></div></section></div></main>
+  <div class="tui-body">
+    <div class="pane list">
+      <p class="grp">tools <span class="ct">2</span></p>
+      <p class="row on">get_current_time</p>
+      <p class="row">convert_time</p>
+      <p class="grp">resources <span class="ct">0</span></p>
+      <p class="grp">prompts <span class="ct">0</span></p>
+    </div>
+    <div class="pane detail">
+      <p class="nm">get_current_time</p>
+      <p class="ds">get the current time in a given timezone</p>
+      <p class="grp">arguments</p>
+      <p class="arg"><span class="an">timezone</span><span class="rq">*</span> <span class="ty">string</span></p>
+      <p class="call"><span class="p">&#10095;</span> enter to call</p>
+    </div>
+  </div>
+  <div class="tui-foot">enter open &middot; / search &middot; tab section &middot; ? keys</div>
+</div><p>the result view formats values by type: dates, yes/no, and grouped numbers. nested objects become sections, and arrays of records become selectable tables. press <code>t</code> for raw json, <code>T</code> for the protocol trace, <code>y</code> to copy.</p></section><section class="sec"><div class="sec-h"><span class="eyebrow">keys</span></div><dl class="keys"><dt>&#8593;&#8595; / j k</dt><dd>move and scroll</dd><dt>enter / l</dt><dd>open or expand a row</dd><dt>/</dt><dd>search names and descriptions</dd><dt>tab</dt><dd>next section</dd><dt>T</dt><dd>protocol trace</dd><dt>?</dt><dd>all keys</dd></dl></section></div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
     <div class="foot-col"><h4>install</h4>

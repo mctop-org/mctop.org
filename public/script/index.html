@@ -19,19 +19,17 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<header class="top">
-  <div class="wrap topbar">
-    <a class="brand" href="/">mctop</a>
-    <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
-  </div>
-  <nav class="mainnav"><div class="wrap"><a href="/">home</a><a href="/explore/">explore</a><a class=on href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><span class="grow"></span><a class="ext" href="https://github.com/mctop-org/mctop">github</a></div></nav>
-</header>
-<main><div class="wrap"><h1>script</h1><p class="tagline">skip the ui when you only need the answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.</p><section class="box"><div class="h"><span>example</span></div><div class="b"><div class="block"><pre><span class="d">$</span> mctop call <span class="s">"uvx mcp-server-time"</span> get_current_time timezone=UTC
+<header class="top"><div class="wrap top-in">
+  <a class="brand" href="/">mctop</a>
+  <nav class="nav"><a href="/">home</a><a href="/explore/">explore</a><a class=on href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><a class="ext" href="https://github.com/mctop-org/mctop">github</a></nav>
+  <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
+</div></header>
+<main><div class="wrap"><h1>script</h1><p class="tagline">skip the ui when you only need the answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.</p><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><pre><span class="d">$</span> mctop call <span class="s">"uvx mcp-server-time"</span> get_current_time timezone=UTC
 {
   <span class="k">"timezone"</span>: "UTC",
   <span class="k">"datetime"</span>: "2026-06-27T04:41:00+00:00",
   <span class="k">"day_of_week"</span>: "Saturday"
-}</pre></div><p>arguments are <code>key=value</code> pairs. values that look like json (numbers, booleans, arrays, objects) are typed; everything else is a string. pass a whole object with <code>--json '{...}'</code>. exit status reflects the call, so it composes in pipelines.</p></div></section></div></main>
+}</pre></div><p>arguments are <code>key=value</code> pairs. values that look like json (numbers, booleans, arrays, objects) are typed; everything else is a string. pass a whole object with <code>--json '{...}'</code>. exit status reflects the call, so it composes in pipelines.</p></section></div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
     <div class="foot-col"><h4>install</h4>
