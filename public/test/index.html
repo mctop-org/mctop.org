@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>try{if(localStorage.getItem('mctop-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 <title>test - mctop</title>
 <meta name="description" content="Assert an MCP server's contract in CI with a YAML spec. Exits non-zero when a tool is renamed or a call drifts.">
 <meta property="og:title" content="test - mctop">
@@ -21,10 +22,10 @@
 <body>
 <header class="top"><div class="wrap top-in">
   <a class="brand" href="/">mctop</a>
-  <nav class="nav"><a href="/">home</a><a href="/explore/">explore</a><a href="/script/">script</a><a class=on href="/test/">test</a><a href="/download/">install</a><a class="ext" href="https://github.com/mctop-org/mctop">github</a></nav>
-  <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
+  <nav class="nav"><a href="/explore/">Explore</a><a href="/script/">Script</a><a class=on href="/test/">Test</a><a href="/download/">Install</a><a class="ext" href="https://github.com/mctop-org/mctop">GitHub</a></nav>
+  <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme">&#9680;</button>
 </div></header>
-<main><div class="wrap"><h1>test</h1><p class="tagline">declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.</p><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><pre><span class="s"># spec.yaml</span>
+<main><div class="wrap"><div class="hero"><h1>Test</h1><p class="tagline">Declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.</p></div><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><pre><span class="s"># spec.yaml</span>
 <span class="k">expect</span>:
   <span class="k">tools</span>: [search, fetch]
 <span class="k">calls</span>:
@@ -33,23 +34,23 @@
 
 <span class="d">$</span> mctop test spec.yaml
 <span class="ok">&#10003; tools present   &#10003; search not_error   &#10003; search contains</span>
-3 passed, 0 failed   <span class="ok">exit 0</span></pre></div><p>specs are strict yaml: unknown keys are errors, so a typo never silently passes. assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. add <code>--report json</code> for machine-readable CI output.</p></section></div></main>
+3 passed, 0 failed   <span class="ok">exit 0</span></pre></div><p>Specs are strict YAML: unknown keys are errors, so a typo never silently passes. Assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. Add <code>--report json</code> for machine-readable CI output.</p></section></div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
     <div class="foot-col"><h4>install</h4>
-      <a href="/install">shell installer</a>
-      <a href="/download/#homebrew">homebrew</a>
-      <a href="/download/#go">go install</a></div>
+      <a href="/install">Shell installer</a>
+      <a href="/download/#homebrew">Homebrew</a>
+      <a href="/download/#go">Go install</a></div>
     <div class="foot-col"><h4>source</h4>
-      <a href="https://github.com/mctop-org/mctop">github</a>
-      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">readme</a>
-      <a href="https://github.com/mctop-org/mctop/issues">issues</a></div>
+      <a href="https://github.com/mctop-org/mctop">GitHub</a>
+      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">Readme</a>
+      <a href="https://github.com/mctop-org/mctop/issues">Issues</a></div>
     <div class="foot-col"><h4>protocol</h4>
       <a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a>
-      <a href="https://github.com/modelcontextprotocol">MCP on github</a></div>
+      <a href="https://github.com/modelcontextprotocol">MCP on GitHub</a></div>
   </div>
   <div class="foot-bot"><span>mctop.org</span>
-    <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT license</a></div>
+    <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT License</a></div>
 </div></footer>
 <script src="/app.js"></script>
 </body></html>

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>try{if(localStorage.getItem('mctop-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 <title>script - mctop</title>
 <meta name="description" content="Call MCP tools from the shell with mctop ls and mctop call. Pipeable, structured output.">
 <meta property="og:title" content="script - mctop">
@@ -21,31 +22,31 @@
 <body>
 <header class="top"><div class="wrap top-in">
   <a class="brand" href="/">mctop</a>
-  <nav class="nav"><a href="/">home</a><a href="/explore/">explore</a><a class=on href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><a class="ext" href="https://github.com/mctop-org/mctop">github</a></nav>
-  <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
+  <nav class="nav"><a href="/explore/">Explore</a><a class=on href="/script/">Script</a><a href="/test/">Test</a><a href="/download/">Install</a><a class="ext" href="https://github.com/mctop-org/mctop">GitHub</a></nav>
+  <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme">&#9680;</button>
 </div></header>
-<main><div class="wrap"><h1>script</h1><p class="tagline">skip the ui when you only need the answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.</p><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><pre><span class="d">$</span> mctop call <span class="s">"uvx mcp-server-time"</span> get_current_time timezone=UTC
+<main><div class="wrap"><div class="hero"><h1>Script</h1><p class="tagline">Skip the UI when you only need the answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.</p></div><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><pre><span class="d">$</span> mctop call <span class="s">"uvx mcp-server-time"</span> get_current_time timezone=UTC
 {
   <span class="k">"timezone"</span>: "UTC",
   <span class="k">"datetime"</span>: "2026-06-27T04:41:00+00:00",
   <span class="k">"day_of_week"</span>: "Saturday"
-}</pre></div><p>arguments are <code>key=value</code> pairs. values that look like json (numbers, booleans, arrays, objects) are typed; everything else is a string. pass a whole object with <code>--json '{...}'</code>. exit status reflects the call, so it composes in pipelines.</p></section></div></main>
+}</pre></div><p>Arguments are <code>key=value</code> pairs. Values that look like JSON (numbers, booleans, arrays, objects) are typed; everything else is a string. Pass a whole object with <code>--json '{...}'</code>. Exit status reflects the call, so it composes in pipelines.</p></section></div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
     <div class="foot-col"><h4>install</h4>
-      <a href="/install">shell installer</a>
-      <a href="/download/#homebrew">homebrew</a>
-      <a href="/download/#go">go install</a></div>
+      <a href="/install">Shell installer</a>
+      <a href="/download/#homebrew">Homebrew</a>
+      <a href="/download/#go">Go install</a></div>
     <div class="foot-col"><h4>source</h4>
-      <a href="https://github.com/mctop-org/mctop">github</a>
-      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">readme</a>
-      <a href="https://github.com/mctop-org/mctop/issues">issues</a></div>
+      <a href="https://github.com/mctop-org/mctop">GitHub</a>
+      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">Readme</a>
+      <a href="https://github.com/mctop-org/mctop/issues">Issues</a></div>
     <div class="foot-col"><h4>protocol</h4>
       <a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a>
-      <a href="https://github.com/modelcontextprotocol">MCP on github</a></div>
+      <a href="https://github.com/modelcontextprotocol">MCP on GitHub</a></div>
   </div>
   <div class="foot-bot"><span>mctop.org</span>
-    <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT license</a></div>
+    <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT License</a></div>
 </div></footer>
 <script src="/app.js"></script>
 </body></html>

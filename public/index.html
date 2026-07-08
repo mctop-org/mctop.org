@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>try{if(localStorage.getItem('mctop-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 <title>mctop - a terminal client for MCP servers</title>
 <meta name="description" content="Explore, call, and CI-test any MCP server from your shell. curl and k9s, but for the Model Context Protocol.">
 <meta property="og:title" content="mctop - a terminal client for MCP servers">
@@ -21,13 +22,13 @@
 <body>
 <header class="top"><div class="wrap top-in">
   <a class="brand" href="/">mctop</a>
-  <nav class="nav"><a class=on href="/">home</a><a href="/explore/">explore</a><a href="/script/">script</a><a href="/test/">test</a><a href="/download/">install</a><a class="ext" href="https://github.com/mctop-org/mctop">github</a></nav>
-  <button class="tbtn" id="theme" title="light / dark" aria-label="toggle theme">&#9680;</button>
+  <nav class="nav"><a href="/explore/">Explore</a><a href="/script/">Script</a><a href="/test/">Test</a><a href="/download/">Install</a><a class="ext" href="https://github.com/mctop-org/mctop">GitHub</a></nav>
+  <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme">&#9680;</button>
 </div></header>
 <main><div class="wrap">
-<h1>a terminal client for <span class="mark">MCP</span> servers</h1>
-<p class="tagline">curl and k9s, but for the model context protocol: explore a server, call its tools, and gate its contract in CI.</p>
-<div class="copyline"><span class="d">$</span><code>curl -fsSL https://mctop.org/install | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">copy</button></div>
+<div class="hero"><h1>A terminal client for <span class="mark">MCP</span> servers</h1>
+<p class="tagline">curl and k9s, but for the Model Context Protocol: explore a server, call its tools, and gate its contract in CI.</p>
+<div class="copyline"><span class="d">$</span><code>curl -fsSL https://mctop.org/install | sh</code><button class="copy" data-cmd="curl -fsSL https://mctop.org/install | sh">Copy</button></div></div>
 <section class="sec"><div class="sec-h"><span class="eyebrow">the client</span></div><div class="tui">
   <div class="tui-bar">
     <span class="cmd"><span class="p">&#10095;</span> mctop uvx mcp-server-time</span>
@@ -43,40 +44,40 @@
     </div>
     <div class="pane detail">
       <p class="nm">get_current_time</p>
-      <p class="ds">get the current time in a given timezone</p>
+      <p class="ds">Get the current time in a given timezone</p>
       <p class="grp">arguments</p>
       <p class="arg"><span class="an">timezone</span><span class="rq">*</span> <span class="ty">string</span></p>
       <p class="call"><span class="p">&#10095;</span> enter to call</p>
     </div>
   </div>
   <div class="tui-foot">enter open &middot; / search &middot; tab section &middot; ? keys</div>
-</div><p class="dim">run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse a server&#39;s tools, resources, and prompts, fill in a tool&#39;s arguments, and read the result.</p></section>
+</div><p class="dim">Run <code>mctop &lt;target&gt;</code> with no subcommand to open the full-screen client: browse a server&#39;s tools, resources, and prompts, fill in a tool&#39;s arguments, and read the result.</p></section>
 <section class="sec"><div class="sec-h"><span class="eyebrow">commands</span></div><ul class="cmds">
-  <li><a class="m" href="/explore/">explore</a><code>mctop &lt;target&gt;</code><span class="d">open the interactive client</span></li>
-  <li><a class="m" href="/script/">script</a><code>mctop ls &lt;target&gt;</code><span class="d">list tools, resources, prompts</span></li>
-  <li><span class="m e"></span><code>mctop call &lt;target&gt; &lt;tool&gt;</code><span class="d">call one tool, print the result</span></li>
-  <li><a class="m" href="/test/">test</a><code>mctop test &lt;spec.yaml&gt;</code><span class="d">assert a contract in CI, fail on drift</span></li>
-  <li><span class="m u">login</span><code>mctop login &lt;url&gt;</code><span class="d">log in to an OAuth server</span></li>
-  <li><span class="m u">upgrade</span><code>mctop upgrade</code><span class="d">update in place</span></li>
-</ul><p class="dim">a target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> url. explore, script, and test each have a page; login and upgrade are utilities.</p></section>
-<section class="sec"><div class="sec-h"><span class="eyebrow">releases</span><a href="https://github.com/mctop-org/mctop/releases">all releases &rarr;</a></div><ul class="rel"><li><span class="date">2026-06-28</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.15.0">v0.15.0</a></li><li><span class="date">2026-06-27</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.14.0">v0.14.0</a></li><li><span class="date">2026-06-22</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.2">v0.13.2</a></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.1">v0.13.1</a></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.0">v0.13.0</a></li><li><span class="date">2026-06-20</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.12.0">v0.12.0</a></li></ul></section>
+  <li><a class="m" href="/explore/">explore</a><code>mctop &lt;target&gt;</code><span class="d">Open the interactive client</span></li>
+  <li><a class="m" href="/script/">script</a><code>mctop ls &lt;target&gt;</code><span class="d">List tools, resources, and prompts</span></li>
+  <li><span class="m e"></span><code>mctop call &lt;target&gt; &lt;tool&gt;</code><span class="d">Call one tool and print the result</span></li>
+  <li><a class="m" href="/test/">test</a><code>mctop test &lt;spec.yaml&gt;</code><span class="d">Assert a contract in CI, fail on drift</span></li>
+  <li><span class="m u">login</span><code>mctop login &lt;url&gt;</code><span class="d">Log in to an OAuth server</span></li>
+  <li><span class="m u">upgrade</span><code>mctop upgrade</code><span class="d">Update in place</span></li>
+</ul><p class="dim">A target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> URL. Explore, script, and test each have a page; login and upgrade are utilities.</p></section>
+<section class="sec"><div class="sec-h"><span class="eyebrow">releases</span><a href="https://github.com/mctop-org/mctop/releases">All releases &rarr;</a></div><ul class="rel"><li><span class="date">2026-06-28</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.15.0">v0.15.0</a></li><li><span class="date">2026-06-27</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.14.0">v0.14.0</a></li><li><span class="date">2026-06-22</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.2">v0.13.2</a></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.1">v0.13.1</a></li><li><span class="date">2026-06-21</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.13.0">v0.13.0</a></li><li><span class="date">2026-06-20</span><a class="tag" href="https://github.com/mctop-org/mctop/releases/tag/v0.12.0">v0.12.0</a></li></ul></section>
 </div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
     <div class="foot-col"><h4>install</h4>
-      <a href="/install">shell installer</a>
-      <a href="/download/#homebrew">homebrew</a>
-      <a href="/download/#go">go install</a></div>
+      <a href="/install">Shell installer</a>
+      <a href="/download/#homebrew">Homebrew</a>
+      <a href="/download/#go">Go install</a></div>
     <div class="foot-col"><h4>source</h4>
-      <a href="https://github.com/mctop-org/mctop">github</a>
-      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">readme</a>
-      <a href="https://github.com/mctop-org/mctop/issues">issues</a></div>
+      <a href="https://github.com/mctop-org/mctop">GitHub</a>
+      <a href="https://github.com/mctop-org/mctop/blob/main/README.md">Readme</a>
+      <a href="https://github.com/mctop-org/mctop/issues">Issues</a></div>
     <div class="foot-col"><h4>protocol</h4>
       <a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a>
-      <a href="https://github.com/modelcontextprotocol">MCP on github</a></div>
+      <a href="https://github.com/modelcontextprotocol">MCP on GitHub</a></div>
   </div>
   <div class="foot-bot"><span>mctop.org</span>
-    <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT license</a></div>
+    <a href="https://github.com/mctop-org/mctop/blob/main/LICENSE">MIT License</a></div>
 </div></footer>
 <script src="/app.js"></script>
 </body></html>

@@ -5,21 +5,22 @@
 @font-face{font-family:"Anthrosevka Mono";src:url("/fonts/AnthrosevkaMono-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
 
 :root{
-  --paper:#f4f2ec; --surface:#eae5db; --hairline:#e1dbcf;
-  --ink:#171512; --body:#3d3833; --muted:#837c72;
-  --accent:#a8503a; --accent-dark:#833c2c;
-  --code-bg:#1d1815; --code-edge:#2a2119;
+  /* dark is the default; light is opt-in via [data-theme="light"] */
+  --paper:#1a1613; --surface:#221d18; --hairline:#322a23;
+  --ink:#f2ece0; --body:#e6ddd0; --muted:#9a9083;
+  --accent:#c9694f; --accent-dark:#d97e63;
+  --code-bg:#120f0c; --code-edge:#2a2119;
   --col:880px;
 
   --serif:"Tiempos Headline","Iowan Old Style","Charter",Palatino,Georgia,serif;
   --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   --mono:"Anthrosevka Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
-:root[data-theme="dark"]{
-  --paper:#1a1613; --surface:#221d18; --hairline:#322a23;
-  --ink:#f2ece0; --body:#e6ddd0; --muted:#9a9083;
-  --accent:#c9694f; --accent-dark:#d97e63;
-  --code-bg:#120f0c; --code-edge:#2a2119;
+:root[data-theme="light"]{
+  --paper:#f4f2ec; --surface:#eae5db; --hairline:#e1dbcf;
+  --ink:#171512; --body:#3d3833; --muted:#837c72;
+  --accent:#a8503a; --accent-dark:#833c2c;
+  --code-bg:#1d1815; --code-edge:#2a2119;
 }
 
 /* colors inside the dark island: theme-independent, tuned for the dark ground */
@@ -38,9 +39,8 @@ a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:from-font}
 
 /* header: one calm row */
-.top{background:var(--paper);border-bottom:1px solid var(--hairline);position:sticky;top:0;z-index:10;
-  -webkit-backdrop-filter:saturate(1.1);backdrop-filter:saturate(1.1)}
-.top-in{display:flex;align-items:center;gap:16px;padding:15px 0}
+.top{background:var(--paper);border-bottom:1px solid var(--hairline);position:sticky;top:0;z-index:10}
+.top-in{display:flex;align-items:center;gap:16px;padding-top:15px;padding-bottom:15px}
 .brand{font-family:var(--mono);font-weight:700;font-size:17px;letter-spacing:-.01em;color:var(--ink)}
 .brand:hover{text-decoration:none;color:var(--accent)}
 .nav{display:flex;gap:1px;margin-left:auto;flex-wrap:wrap}
@@ -55,10 +55,15 @@ a:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-thic
 main{padding:52px 0 0}
 h1{font-family:var(--serif);font-size:35px;font-weight:400;letter-spacing:-.021em;line-height:1.14;color:var(--ink);margin:0 0 16px}
 h1 .mark{color:var(--accent);font-style:italic}
-.tagline{color:var(--muted);margin:0 0 30px;max-width:60ch;font-size:16px}
+.tagline{color:var(--muted);margin:0 0 28px;max-width:60ch;font-size:16px}
+
+/* hero (intro) is one block; the last element carries no trailing margin
+   so the gap to the first section is the hero's, not the copyline's */
+.hero{margin:0 0 46px}
+.hero>:last-child{margin-bottom:0}
 
 /* open sections: an eyebrow over a hairline, then content. no boxes. */
-.sec{margin:0 0 52px}
+.sec{margin:0 0 46px}
 .sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 18px;padding-bottom:9px;border-bottom:1px solid var(--hairline)}
 .eyebrow{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 .sec-h a{font-family:var(--mono);color:var(--accent);font-size:12.5px;letter-spacing:.3px}
@@ -68,7 +73,7 @@ h1 .mark{color:var(--accent);font-style:italic}
 p code,li code,td code{font-family:var(--mono);color:var(--accent-dark);background:var(--surface);border:1px solid var(--hairline);border-radius:4px;padding:.03em .34em;font-size:.9em}
 
 /* install command: a dark island bar */
-.copyline{display:flex;align-items:center;gap:12px;background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;padding:13px 16px;margin:0 0 34px;font-family:var(--mono);font-size:13.5px;color:var(--cf)}
+.copyline{display:flex;align-items:center;gap:12px;background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;padding:14px 16px;margin:0 0 16px;font-family:var(--mono);font-size:13.5px;color:var(--cf)}
 .copyline code{flex:1;white-space:nowrap;overflow:auto;color:var(--cf)}.copyline .d{color:var(--c-prompt)}
 .copy{background:none;border:1px solid #3a3026;color:#9a8f7d;cursor:pointer;font-family:var(--mono);font-size:12px;padding:4px 10px;white-space:nowrap;border-radius:5px}
 .copy:hover{color:var(--c-key);border-color:var(--c-key)}.copy.ok{color:var(--c-ok);border-color:var(--c-ok)}
@@ -77,12 +82,12 @@ p code,li code,td code{font-family:var(--mono);color:var(--accent-dark);backgrou
 .tui{background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;overflow:hidden;
   font-family:var(--mono);font-size:13.5px;line-height:1.5;color:var(--c-txt);margin:0 0 16px}
 .tui .p{color:var(--c-prompt)}
-.tui-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid var(--c-line)}
+.tui-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--c-line)}
 .tui-bar .cmd{color:var(--cf);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tui-bar .stat{display:inline-flex;align-items:center;gap:7px;color:var(--c-dim);white-space:nowrap;flex:0 0 auto}
 .tui-bar .dot{width:7px;height:7px;border-radius:50%;background:var(--c-ok);box-shadow:0 0 0 3px rgba(143,174,111,.16)}
 .tui-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
-.tui-body .pane{padding:15px 16px}
+.tui-body .pane{padding:14px 16px}
 .tui-body .detail{border-left:1px solid var(--c-line)}
 .tui .grp{font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--c-dim);margin:0 0 9px}
 .tui .grp+.grp,.tui .row+.grp,.tui .arg+.grp{margin-top:16px}
@@ -94,10 +99,10 @@ p code,li code,td code{font-family:var(--mono);color:var(--accent-dark);backgrou
 .tui .ds{color:var(--c-txt);margin:0 0 4px}
 .tui .arg{margin:0}.tui .arg .an{color:var(--cf)}.tui .arg .rq{color:var(--c-prompt)}.tui .arg .ty{color:var(--c-dim)}
 .tui .call{color:var(--c-dim);margin-top:12px}
-.tui-foot{padding:11px 16px;border-top:1px solid var(--c-line);color:var(--c-dim);font-size:12.5px}
+.tui-foot{padding:14px 16px;border-top:1px solid var(--c-line);color:var(--c-dim);font-size:12.5px}
 
 /* command / output blocks: dark islands that hug their content */
-.block{display:inline-block;max-width:100%;vertical-align:top;background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;padding:15px 17px;margin:0 0 14px;overflow-x:auto;font-size:13.5px;line-height:1.6}
+.block{display:inline-block;max-width:100%;vertical-align:top;background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;padding:14px 16px;margin:0 0 16px;overflow-x:auto;font-size:13.5px;line-height:1.6}
 .block pre{font-family:var(--mono);white-space:pre;color:var(--cf)}
 .block .d{color:var(--c-prompt)}.block .s{color:var(--c-dim)}.block .k{color:var(--c-key)}
 .block .ok{color:var(--c-ok)}.block .no{color:var(--c-no)}
