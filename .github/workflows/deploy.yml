@@ -1,0 +1,60 @@
+# Build and deploy mctop.org. Runs on every push to main and nightly, so the
+# releases feed and the installer track the mctop repo without a manual deploy.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refresh the releases feed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/mctop-org/mctop/releases \
+            --jq '.[0:6][] | "\(.tag_name)|\(.published_at[:10])|\(.name)"' > releases.txt
+          test -s releases.txt
+          grep -Eq '^v[0-9]+\.[0-9]+' releases.txt
+          cat releases.txt
+
+      - name: Sync the installer from the mctop repo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/mctop-org/mctop/contents/install.sh \
+            -H "Accept: application/vnd.github.raw" > public/install
+          head -1 public/install | grep -qx '#!/bin/sh'
+          grep -q 'mctop-org/mctop' public/install
+
+      - name: Build
+        run: python3 build.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx wrangler@4.105.0 deploy
+
+      - name: Verify live
+        run: |
+          curl -sf https://mctop.org/ | grep -q 'terminal client'
+          curl -sf https://mctop.org/install | head -1 | grep -qx '#!/bin/sh'
+          test "$(curl -s -o /dev/null -w '%{http_code}' https://mctop.org/no-such-page)" = "404"
