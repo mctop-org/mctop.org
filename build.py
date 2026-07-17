@@ -9,7 +9,7 @@ public/.
 Releases are read from releases.txt (lines "tag|date|name") if present, written
 at build time from the live GitHub releases, so the feed stays current.
 """
-import os, hashlib, base64, datetime
+import os, hashlib, base64
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PUB = os.path.join(HERE, "public")
@@ -243,9 +243,7 @@ def write_meta():
     open(os.path.join(PUB, "robots.txt"), "w").write(
         f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
 
-    today = datetime.date.today().isoformat()
-    urls = "".join(
-        f"<url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>" for p in sorted(set(PAGES)))
+    urls = "".join(f"<url><loc>{SITE}{p}</loc></url>" for p in sorted(set(PAGES)))
     open(os.path.join(PUB, "sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
