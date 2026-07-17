@@ -38,6 +38,11 @@ body{font-family:var(--sans);
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:from-font}
 
+/* visible keyboard focus: a branded ring, only for keyboard nav (:focus-visible) */
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+a:focus-visible{text-decoration:none}
+.copy:focus-visible,.tbtn:focus-visible{outline-color:var(--c-key);outline-offset:2px}
+
 /* header: one calm row */
 .top{background:var(--paper);border-bottom:1px solid var(--hairline);position:sticky;top:0;z-index:10}
 .top-in{display:flex;align-items:center;gap:16px;padding-top:15px;padding-bottom:15px}
