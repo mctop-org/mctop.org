@@ -9,11 +9,20 @@ public/.
 Releases are read from releases.txt (lines "tag|date|name") if present, written
 at build time from the live GitHub releases, so the feed stays current.
 """
-import os
+import os, hashlib, base64, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PUB = os.path.join(HERE, "public")
 REPO = "https://github.com/mctop-org/mctop"
+SITE = "https://mctop.org"
+
+# The one inline script (sets the stored theme before paint to avoid a flash).
+# Kept as a constant so its Content-Security-Policy hash stays in sync with it.
+THEME_INLINE = ("try{if(localStorage.getItem('mctop-theme')==='light')"
+                "document.documentElement.setAttribute('data-theme','light')}catch(e){}")
+CSP_HASH = "sha256-" + base64.b64encode(hashlib.sha256(THEME_INLINE.encode()).digest()).decode()
+
+PAGES = []  # canonical paths, collected as pages are written, for the sitemap
 
 NAV = [("Explore", "/explore/"), ("Script", "/script/"),
        ("Test", "/test/"), ("Install", "/download/")]
@@ -32,7 +41,7 @@ def head(title, desc, canonical):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<script>try{{if(localStorage.getItem('mctop-theme')==='light')document.documentElement.setAttribute('data-theme','light')}}catch(e){{}}</script>
+<script>{THEME_INLINE}</script>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta property="og:title" content="{title}">
@@ -52,7 +61,7 @@ def head(title, desc, canonical):
 <header class="top"><div class="wrap top-in">
   <a class="brand" href="/">mctop</a>
   <nav class="nav">{nav(canonical)}</nav>
-  <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme">&#9680;</button>
+  <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme" aria-pressed="false">&#9680;</button>
 </div></header>
 <main><div class="wrap">"""
 
@@ -158,6 +167,7 @@ def page(path, title, desc, body):
     outdir = PUB if path == "/" else os.path.join(PUB, path.strip("/"))
     os.makedirs(outdir, exist_ok=True)
     open(os.path.join(outdir, "index.html"), "w").write(full)
+    PAGES.append(path)
 
 def feature(title, lede, example_html, prose, keys=None):
     parts = [hero(f'<h1>{title}</h1><p class="tagline">{lede}</p>'),
@@ -216,4 +226,62 @@ page("/test/", "test - mctop",
 page("/download/", "install - mctop",
      "Install mctop via shell, Homebrew, or go install. One static binary, self-updates with mctop upgrade.", download)
 
+# ---------------- 404 (served with a 404 status via wrangler not_found_handling) ----------------
+notfound = (hero('<h1>Page not found</h1>'
+                 '<p class="tagline">That page moved or never existed. Pick up from one of these.</p>')
+            + section("go", '''<ul class="cmds">
+  <li><a class="m" href="/">home</a><code>mctop</code><span class="d">Overview and install</span></li>
+  <li><a class="m" href="/explore/">explore</a><code>mctop &lt;target&gt;</code><span class="d">The interactive client</span></li>
+  <li><a class="m" href="/download/">install</a><code>curl &#8230; | sh</code><span class="d">Get the binary</span></li>
+  <li><a class="m" href="''' + REPO + '''">github</a><code>mctop-org/mctop</code><span class="d">Source and issues</span></li>
+</ul>'''))
+open(os.path.join(PUB, "404.html"), "w").write(
+    head("Page not found - mctop", "The page you are looking for does not exist.", "/404") + notfound + foot())
+
+# ---------------- machine-readable meta: robots + sitemap + response headers ----------------
+def write_meta():
+    open(os.path.join(PUB, "robots.txt"), "w").write(
+        f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
+
+    today = datetime.date.today().isoformat()
+    urls = "".join(
+        f"<url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>" for p in sorted(set(PAGES)))
+    open(os.path.join(PUB, "sitemap.xml"), "w").write(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+        f"{urls}</urlset>\n")
+
+    csp = ("default-src 'self'; "
+           f"script-src 'self' '{CSP_HASH}'; "
+           "style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; "
+           "base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; "
+           "upgrade-insecure-requests")
+    open(os.path.join(PUB, "_headers"), "w").write(f"""/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: {csp}
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/brand/*
+  Cache-Control: public, max-age=604800
+
+/style.css
+  Cache-Control: public, max-age=86400
+
+/app.js
+  Cache-Control: public, max-age=86400
+
+/install
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=300
+""")
+
+write_meta()
+
 print("built:", sorted(p for p in os.listdir(PUB) if not p.startswith((".", "_"))))
+print("meta: robots.txt sitemap.xml _headers 404.html   csp-hash:", CSP_HASH)

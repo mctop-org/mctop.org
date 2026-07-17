@@ -12,9 +12,14 @@
     });
   });
   const root = document.documentElement;
-  document.getElementById("theme")?.addEventListener("click", () => {
+  const themeBtn = document.getElementById("theme");
+  const syncPressed = () =>
+    themeBtn?.setAttribute("aria-pressed", root.getAttribute("data-theme") === "light" ? "true" : "false");
+  syncPressed();
+  themeBtn?.addEventListener("click", () => {
     const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
     root.setAttribute("data-theme", next);
     localStorage.setItem("mctop-theme", next);
+    syncPressed();
   });
 })();
