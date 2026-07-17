@@ -58,12 +58,13 @@ def head(title, desc, canonical):
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap top-in">
   <a class="brand" href="/">mctop</a>
   <nav class="nav">{nav(canonical)}</nav>
   <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme" aria-pressed="false">&#9680;</button>
 </div></header>
-<main><div class="wrap">"""
+<main id="main"><div class="wrap">"""
 
 def hero(inner):
     return f'<div class="hero">{inner}</div>'

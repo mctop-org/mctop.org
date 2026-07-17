@@ -20,12 +20,13 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap top-in">
   <a class="brand" href="/">mctop</a>
   <nav class="nav"><a href="/explore/">Explore</a><a href="/script/">Script</a><a class=on href="/test/">Test</a><a href="/download/">Install</a><a class="ext" href="https://github.com/mctop-org/mctop">GitHub</a></nav>
   <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme" aria-pressed="false">&#9680;</button>
 </div></header>
-<main><div class="wrap"><div class="hero"><h1>Test</h1><p class="tagline">Declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.</p></div><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><pre><span class="s"># spec.yaml</span>
+<main id="main"><div class="wrap"><div class="hero"><h1>Test</h1><p class="tagline">Declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.</p></div><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><pre><span class="s"># spec.yaml</span>
 <span class="k">expect</span>:
   <span class="k">tools</span>: [search, fetch]
 <span class="k">calls</span>:

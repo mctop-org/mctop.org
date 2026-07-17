@@ -20,12 +20,13 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap top-in">
   <a class="brand" href="/">mctop</a>
   <nav class="nav"><a href="/explore/">Explore</a><a href="/script/">Script</a><a href="/test/">Test</a><a class=on href="/download/">Install</a><a class="ext" href="https://github.com/mctop-org/mctop">GitHub</a></nav>
   <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme" aria-pressed="false">&#9680;</button>
 </div></header>
-<main><div class="wrap">
+<main id="main"><div class="wrap">
 <div class="hero"><h1>Install</h1><p class="tagline">One static binary, no runtime.</p></div>
 <section class="sec"><div class="sec-h"><span class="eyebrow">shell</span></div><div class="block"><pre><span class="d">$</span> curl -fsSL https://mctop.org/install | sh</pre></div><p class="dim">The installer is plain text at <a href="/install">mctop.org/install</a>. It downloads the release archive, checks its SHA-256 against the published checksums, and refuses to install on a mismatch.</p></section>
 <section class="sec"><div class="sec-h"><span class="eyebrow">homebrew</span></div><div class="block"><pre><span class="d">$</span> brew install mctop-org/tap/mctop</pre></div></section>
