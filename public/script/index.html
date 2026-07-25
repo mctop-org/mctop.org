@@ -26,7 +26,7 @@
   <nav class="nav"><a href="/explore/">Explore</a><a class=on href="/script/">Script</a><a href="/test/">Test</a><a href="/download/">Install</a><a class="ext" href="https://github.com/mctop-org/mctop">GitHub</a></nav>
   <button class="tbtn" id="theme" title="Light / dark" aria-label="Toggle theme" aria-pressed="false">&#9680;</button>
 </div></header>
-<main id="main"><div class="wrap"><div class="hero"><h1>Script</h1><p class="tagline">Skip the UI when you only need the answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.</p></div><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><pre><span class="d">$</span> mctop call <span class="s">"uvx mcp-server-time"</span> get_current_time timezone=UTC
+<main id="main"><div class="wrap"><div class="hero"><h1>Script</h1><p class="tagline">Skip the UI when you only need the answer. mctop ls lists what a server exposes; mctop call runs one tool and prints the structured result on stdout, ready to pipe into jq or a script.</p></div><section class="sec"><div class="sec-h"><span class="eyebrow">example</span></div><div class="block"><div class="block-bar">~/mctop</div><pre><span class="d">$</span> mctop call <span class="s">"uvx mcp-server-time"</span> get_current_time timezone=UTC
 {
   <span class="k">"timezone"</span>: "UTC",
   <span class="k">"datetime"</span>: "2026-06-27T04:41:00+00:00",
