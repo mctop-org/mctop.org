@@ -114,9 +114,10 @@ p code,li code,td code{font-family:var(--mono);color:var(--accent-dark);backgrou
 .tui .call{color:var(--c-dim);margin-top:12px}
 .tui-foot{padding:14px 16px;border-top:1px solid var(--c-line);color:var(--c-dim);font-size:12.5px}
 
-/* command / output blocks: dark islands that hug their content */
-.block{display:inline-block;max-width:100%;vertical-align:top;background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;padding:14px 16px;margin:0 0 16px;overflow-x:auto;font-size:13.5px;line-height:1.6}
-.block pre{font-family:var(--mono);white-space:pre;color:var(--cf)}
+/* command / output blocks: dark islands that hug their content, same bar chrome as .tui */
+.block{display:inline-block;max-width:100%;vertical-align:top;background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;margin:0 0 16px;overflow:hidden;font-size:13.5px;line-height:1.6}
+.block-bar{padding:9px 16px;border-bottom:1px solid var(--c-line);color:var(--c-dim);font-size:12px}
+.block pre{font-family:var(--mono);white-space:pre;color:var(--cf);padding:14px 16px;overflow-x:auto}
 .block .d{color:var(--c-prompt)}.block .s{color:var(--c-dim)}.block .k{color:var(--c-key)}
 .block .ok{color:var(--c-ok)}.block .no{color:var(--c-no)}
 

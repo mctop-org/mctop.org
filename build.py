@@ -75,7 +75,7 @@ def section(label, body, right=""):
             f'<span class="eyebrow">{label}</span>{r}</div>{body}</section>')
 
 def block(lines):
-    return f'<div class="block"><pre>{lines}</pre></div>'
+    return f'<div class="block"><div class="block-bar">~/mctop</div><pre>{lines}</pre></div>'
 
 COPYLINE = ('<div class="copyline"><span class="d">$</span>'
             '<code>curl -fsSL https://mctop.org/install | sh</code>'
