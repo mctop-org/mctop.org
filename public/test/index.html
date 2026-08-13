@@ -35,7 +35,7 @@
 
 <span class="d">$</span> mctop test spec.yaml
 <span class="ok">&#10003; tools present   &#10003; search not_error   &#10003; search contains</span>
-3 passed, 0 failed   <span class="ok">exit 0</span></pre></div><p>Specs are strict YAML: unknown keys are errors, so a typo never silently passes. Assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. Add <code>--report json</code> for machine-readable CI output.</p></section></div></main>
+3 passed, 0 failed   <span class="ok">exit 0</span></pre></div><p>Specs are strict YAML: unknown keys are errors, so a typo never silently passes. Assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. Add <code>--report json</code> for machine-readable CI output.</p><p>You do not have to write one by hand. <code>mctop record &lt;target&gt; -o spec.yaml</code> opens the client and saves every tool call you make as a step, with header values written as <code>$NAME</code> env references so a recording never leaks a secret.</p></section></div></main>
 <footer class="foot"><div class="wrap">
   <div class="foot-cols">
     <div class="foot-col"><h4>install</h4>

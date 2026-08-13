@@ -1,4 +1,4 @@
-/* mctop.org — "Ink & Rust": warm paper ground, serif display, mono code islands.
+/* mctop.org, "Ink & Rust": warm paper ground, serif display, mono code islands.
    Lean single column: open sections over hairlines, no boxes. The client preview
    is one aligned CSS component reused on every page. */
 @font-face{font-family:"Anthrosevka Mono";src:url("/fonts/AnthrosevkaMono-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
@@ -35,7 +35,7 @@ html{-webkit-text-size-adjust:100%}
 body{font-family:var(--sans);
   background:var(--paper);color:var(--body);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
 .wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
-a{color:var(--accent);text-decoration:none}
+a{color:var(--accent);text-decoration:none;transition:color .15s ease}
 a:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:from-font}
 
 /* skip link: hidden until keyboard-focused, then a small bar under the header */
@@ -54,18 +54,20 @@ a:focus-visible{text-decoration:none}
 .brand{font-family:var(--mono);font-weight:700;font-size:17px;letter-spacing:-.01em;color:var(--ink)}
 .brand:hover{text-decoration:none;color:var(--accent)}
 .nav{display:flex;gap:1px;margin-left:auto;flex-wrap:wrap}
-.nav a{font-family:var(--mono);font-size:13px;color:var(--muted);padding:5px 10px;border-radius:5px}
+.nav a{font-family:var(--mono);font-size:13px;color:var(--muted);padding:5px 10px;border-radius:5px;transition:color .15s ease,background-color .15s ease}
 .nav a:hover{color:var(--ink);background:var(--surface);text-decoration:none}
+.nav a:active{transform:scale(.96)}
 .nav a.on{color:var(--accent);font-weight:700}
 .nav .ext{color:var(--muted)}
-.tbtn{background:none;border:1px solid var(--hairline);color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:13px;width:29px;height:29px;flex:0 0 auto;display:grid;place-items:center;border-radius:6px}
+.tbtn{background:none;border:1px solid var(--hairline);color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:13px;width:29px;height:29px;flex:0 0 auto;display:grid;place-items:center;border-radius:6px;transition:color .15s ease,border-color .15s ease,transform .1s ease}
 .tbtn:hover{color:var(--accent);border-color:var(--accent)}
+.tbtn:active{transform:scale(.9)}
 
 /* page intro: the serif thesis */
 main{padding:52px 0 0}
-h1{font-family:var(--serif);font-size:35px;font-weight:400;letter-spacing:-.021em;line-height:1.14;color:var(--ink);margin:0 0 16px}
+h1{font-family:var(--serif);font-size:35px;font-weight:400;letter-spacing:-.021em;line-height:1.14;color:var(--ink);margin:0 0 16px;text-wrap:balance}
 h1 .mark{color:var(--accent);font-style:italic}
-.tagline{color:var(--muted);margin:0 0 28px;max-width:60ch;font-size:16px}
+.tagline{color:var(--muted);margin:0 0 28px;max-width:60ch;font-size:16px;text-wrap:pretty}
 
 /* hero (intro) is one block; the last element carries no trailing margin
    so the gap to the first section is the hero's, not the copyline's */
@@ -77,7 +79,7 @@ h1 .mark{color:var(--accent);font-style:italic}
 .sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 18px;padding-bottom:9px;border-bottom:1px solid var(--hairline)}
 .eyebrow{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 .sec-h a{font-family:var(--mono);color:var(--accent);font-size:12.5px;letter-spacing:.3px}
-.sec p{max-width:68ch;margin:0 0 12px;color:var(--body)}
+.sec p{max-width:68ch;margin:0 0 12px;color:var(--body);text-wrap:pretty}
 .sec p:last-child{margin-bottom:0}
 .sec p .dim,.dim{color:var(--muted)}
 p code,li code,td code{font-family:var(--mono);color:var(--accent-dark);background:var(--surface);border:1px solid var(--hairline);border-radius:4px;padding:.03em .34em;font-size:.9em}
@@ -85,8 +87,9 @@ p code,li code,td code{font-family:var(--mono);color:var(--accent-dark);backgrou
 /* install command: a dark island bar */
 .copyline{display:flex;align-items:center;gap:12px;background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;padding:14px 16px;margin:0 0 16px;font-family:var(--mono);font-size:13.5px;color:var(--cf)}
 .copyline code{flex:1;white-space:nowrap;overflow:auto;color:var(--cf)}.copyline .d{color:var(--c-prompt)}
-.copy{background:none;border:1px solid #3a3026;color:#9a8f7d;cursor:pointer;font-family:var(--mono);font-size:12px;padding:4px 10px;white-space:nowrap;border-radius:5px}
+.copy{background:none;border:1px solid #3a3026;color:#9a8f7d;cursor:pointer;font-family:var(--mono);font-size:12px;padding:4px 10px;white-space:nowrap;border-radius:5px;transition:color .15s ease,border-color .15s ease,transform .1s ease}
 .copy:hover{color:var(--c-key);border-color:var(--c-key)}.copy.ok{color:var(--c-ok);border-color:var(--c-ok)}
+.copy:active{transform:scale(.94)}
 
 /* the client preview: one aligned CSS terminal, symmetric and responsive */
 .tui{background:var(--code-bg);border:1px solid var(--code-edge);border-radius:8px;overflow:hidden;
