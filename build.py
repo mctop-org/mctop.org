@@ -118,6 +118,7 @@ home = f"""
   <li><a class="m" href="/script/">script</a><code>mctop ls &lt;target&gt;</code><span class="d">List tools, resources, and prompts</span></li>
   <li><span class="m e"></span><code>mctop call &lt;target&gt; &lt;tool&gt;</code><span class="d">Call one tool and print the result</span></li>
   <li><a class="m" href="/test/">test</a><code>mctop test &lt;spec.yaml&gt;</code><span class="d">Assert a contract in CI, fail on drift</span></li>
+  <li><span class="m e"></span><code>mctop record &lt;target&gt;</code><span class="d">Save a session&#39;s calls as a spec</span></li>
   <li><span class="m u">login</span><code>mctop login &lt;url&gt;</code><span class="d">Log in to an OAuth server</span></li>
   <li><span class="m u">upgrade</span><code>mctop upgrade</code><span class="d">Update in place</span></li>
 </ul>''' + '<p class="dim">A target is a command to spawn (<code>"uvx mcp-server-time"</code>) or an <code>http(s)://</code> URL. Explore, script, and test each have a page; login and upgrade are utilities.</p>')}
@@ -223,7 +224,8 @@ page("/test/", "test - mctop",
      "Assert an MCP server's contract in CI with a YAML spec. Exits non-zero when a tool is renamed or a call drifts.",
      feature("Test", "Declare the tools that must exist and how their calls must behave. mctop test connects, checks the contract, and exits non-zero when it drifts, so a renamed tool fails the build instead of an agent in production.",
         block(test_blk),
-        "<p>Specs are strict YAML: unknown keys are errors, so a typo never silently passes. Assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. Add <code>--report json</code> for machine-readable CI output.</p>"))
+        "<p>Specs are strict YAML: unknown keys are errors, so a typo never silently passes. Assert on <code>not_error</code>, substring <code>contains</code>, and the tools a server must expose. Add <code>--report json</code> for machine-readable CI output.</p>"
+        "<p>You do not have to write one by hand. <code>mctop record &lt;target&gt; -o spec.yaml</code> opens the client and saves every tool call you make as a step, with header values written as <code>$NAME</code> env references so a recording never leaks a secret.</p>"))
 page("/download/", "install - mctop",
      "Install mctop via shell, Homebrew, or go install. One static binary, self-updates with mctop upgrade.", download)
 
