@@ -159,6 +159,7 @@ def foot():
       <a href="https://github.com/modelcontextprotocol">MCP on GitHub</a></div>
   </div>
   <div class="foot-bot"><span>mctop.org</span>
+    <a href="https://alokranjan.me/" rel="me">Built by Alok Ranjan</a>
     <a href="{REPO}/blob/main/LICENSE">MIT License</a></div>
 </div></footer>
 <script src="/app.js"></script>
